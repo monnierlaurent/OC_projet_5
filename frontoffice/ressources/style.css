@@ -1,0 +1,309 @@
+    @font-face {
+        font-family: "belligerent";
+        src: url(/frontoffice/ressources/fonts/belligerent.ttf);
+    }
+    
+    @font-face {
+        font-family: "roboto";
+        src: url(/frontoffice/ressources/fonts/Roboto-Regular.ttf);
+    }
+    
+    html {
+        --noir: #000;
+        --gris: ;
+        --rose: #F3E9F1;
+        --violet: #D1C4E9;
+        --violet2: #935DF3;
+    }
+    
+    * {
+        margin: 0;
+        font-family: "roboto";
+        text-align: left;
+    }
+    
+    a {
+        text-decoration: none;
+        color: var(--noir);
+    }
+    
+    body {
+        display: flex;
+        justify-content: center;
+        background-color: #fff;
+    }
+    /*-----index-----*/
+    
+    .bloc__main--seize {
+        background-color: var(--rose);
+        width: 70%;
+        border: solid 4px var(--violet);
+    }
+    
+    .bloc__footer--flex,
+    .bloc__header--flex {
+        padding: 1.5em 0 1.5em 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .bloc__header--seize_font {
+        font-size: 6em;
+        font-family: "belligerent";
+        margin-left: 0.5em;
+    }
+    
+    .bloc__nav--flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        border-top: solid 4px var(--violet);
+        border-bottom: solid 4px var(--violet);
+        padding: 0.3em;
+    }
+    
+    .bloc__nav--lien {
+        font-family: "belligerent";
+        color: var(--noir);
+        font-size: 2.5em;
+        padding-right: 2em;
+    }
+    
+    .bloc__section--padding {
+        padding-bottom: 3em;
+    }
+    
+    .bloc__section__div--flex {
+        margin-top: 3em;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .bloc__section__header--font {
+        font-family: "belligerent";
+        font-size: 2.5em;
+    }
+    
+    .bloc__section__article--border {
+        margin: auto;
+        border: solid 4px var(--violet);
+    }
+    
+    .bloc__section__article--flex {
+        background-color: #fff;
+        padding: 2em 1em 2em 1em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .bloc__section__heading--font {
+        padding-top: 0.5em;
+        font-family: "belligerent";
+        font-size: 2em;
+    }
+    
+    .bloc__section__article--image {
+        width: 25em;
+        height: auto;
+        box-shadow: 0 0 5px var(--violet);
+    }
+    
+    .bloc__section__article--paragraphe {
+        padding-top: 1em;
+        font-family: "belligerent";
+        font-size: 1.5em;
+        color: var(--noir);
+    }
+    
+    .bloc__footer--border {
+        border-top: solid 4px var(--violet);
+    }
+    
+    .bloc__footer__div--flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .bloc__footer__lien--color {
+        margin: 0 0.5em 0.2em 0.5em;
+        color: var(--violet2);
+    }
+    
+    .bloc__footer__img--seize {
+        width: 3%;
+        height: auto;
+        padding-right: 1em;
+        padding-bottom: 0.5em;
+    }
+    /*-----page produit-----*/
+    
+    .bloc__section_2__div--flex {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .bloc__section_2__div--font {
+        font-size: 1.5em;
+    }
+    
+    .bloc__section_2__div--padding {
+        display: flex;
+        flex-direction: column;
+        padding-top: 2em;
+    }
+    
+    .bloc__section_2__div--seize {
+        width: 50%;
+        padding: 1.5em;
+    }
+    
+    .bloc__section_2__img--seize {
+        width: 90%;
+        height: auto;
+        box-shadow: 0 0 5px var(--violet);
+    }
+    
+    .bloc__section_2__parag--font {
+        font-size: 1.25em;
+    }
+    
+    .bloc__section_2__button--padding {
+        padding-top: 2em;
+    }
+    
+    .bloc__section_2__button--style,
+    .bloc__section_4__button--style {
+        font-family: "belligerent";
+        font-size: 1.5em;
+        background-color: var(--violet2);
+        border-radius: 20px;
+        border: solid 3px var(--violet);
+        padding: 0.3em;
+    }
+    
+    .bloc__section_2__button--style:active,
+    .bloc__section_4__button--style:active {
+        background-color: var(--rose);
+        border: solid 3px var(--violet2);
+    }
+    
+    .bloc__section_2__label--font {
+        font-size: 1.5em;
+    }
+    
+    .bloc__section_2__select--font {
+        border: solid 3px var(--violet);
+        font-size: 0.9em;
+    }
+    /*-----confirmation de commande-----*/
+    
+    .bloc__section_3__padding {
+        padding: 3em;
+    }
+    
+    .bloc__section_3__parag--font {
+        font-size: 1.5em;
+        text-align: center;
+        font-family: "belligerent";
+        padding-bottom: 2em;
+        line-height: 2em;
+    }
+    
+    .bloc__section_4__button--flex,
+    .bloc__button--flex {
+        display: flex;
+        justify-content: flex-end;
+    }
+    /*-----panier-----*/
+    
+    .bloc__form--border {
+        padding: 2em;
+        border-top: solid 3px var(--violet);
+        border-bottom: solid 3px var(--violet);
+    }
+    
+    .bloc__form__input--style {
+        width: 10%;
+    }
+    
+    .bloc__form--flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .bloc__form--flex2 {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .bloc__form--padding {
+        padding-left: 3em;
+    }
+    
+    .bloc__form__label--font {
+        margin-bottom: 1.5em;
+        font-size: 1.5em;
+    }
+    
+    .bloc__form__label--font1 {
+        padding-top: 0.8em;
+        margin-bottom: 1.5em;
+        font-size: 1.5em;
+    }
+    
+    .bloc__form__input--border {
+        border: solid 3px var(--violet);
+        border-radius: 5px;
+        margin-bottom: 2em;
+        font-size: 1.5em;
+    }
+    
+    .bloc__form--font {
+        font-family: "roboto";
+        font-size: 1.5em;
+    }
+    
+    .bloc__button--padding {
+        padding: 1.5em;
+    }
+    
+    .bloc__table--border {
+        width: 100%;
+        border-top: solid 3px var(--violet);
+    }
+    
+    .bloc__table--color {
+        color: var(--violet2);
+        font-style: italic;
+    }
+    
+    .bloc__table--align {
+        text-align: center;
+        padding: 0.5em;
+    }
+    
+    .bloc__table__button--style {
+        font-family: "belligerent";
+        font-size: 0.7em;
+        background-color: var(--violet2);
+        border-radius: 20px;
+        border: solid 3px var(--violet);
+        padding: 0.3em;
+    }
+    
+    .bloc__table__button--style:active {
+        background-color: var(--rose);
+        border: solid 3px var(--violet2);
+    }
+    
+    .bloc__table--padding {
+        padding-right: 0.9em;
+    }

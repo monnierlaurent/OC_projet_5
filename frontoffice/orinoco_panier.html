@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/frontoffice/ressources/css/fontawesome-free-5.12.0-web/css/all.css">
+    <link rel="shortcut icon" type=image/png href=fav.png>
+
+    <link rel="stylesheet" href="/frontoffice/ressources/style.css">
+
+    <title>Orinoco/panier</title>
+</head>
+
+<body>
+    <main class="bloc__main--seize">
+        <a href="index.html">
+            <header class="bloc__header--flex">
+                <img src="/images/icon-orinoco.png" alt="logo de la boutique en ligne Orinoco">
+                <h1 class="bloc__header--seize_font">Orinoco</h1>
+            </header>
+        </a>
+
+
+        <nav class="bloc__nav--flex">
+            <a class="bloc__nav--lien" href="index.html">Catalogue</a>
+        </nav>
+
+        <section class="bloc__section_3__padding">
+            <header class="bloc__header--flex">
+                <h2 class="bloc__section__header--font">Panier</h2>
+            </header>
+
+            <table class="bloc__table--border bloc__form--font">
+                <tr>
+                    <td class="bloc__table--color">Produit</td>
+                    <td class="bloc__table--align bloc__table--color">Quantité</td>
+                    <td class="bloc__table--align bloc__table--color">Prix</td>
+                    <td class="bloc__table--align bloc__table--color">Total</td>
+                    <td class="bloc__table--align bloc__table--color">supprimer</td>
+                </tr>
+                <tr>
+                    <td>norbert</td>
+                    <td class="bloc__table--align">1</td>
+                    <td class="bloc__table--align">290€</td>
+                    <td class="bloc__table--align">290€</td>
+                    <td class="bloc__table--align"><button class="bloc__table__button--style">supprimer</button></td>
+                </tr>
+            </table>
+
+            <table class="bloc__table--border bloc__form--font">
+                <tr>
+                    <td>Total de la commande</td>
+                    <td class="bloc__table--align bloc__table--padding">290€</td>
+                </tr>
+            </table>
+        </section>
+
+        <form class="bloc__form--border bloc__form--flex ">
+            <div class="bloc__form--flex2 ">
+                <label class="bloc__form__label--font" for="email">adresse email :</label>
+                <label class="bloc__form__label--font1" for="nom">Nom :</label>
+                <label class="bloc__form__label--font1" for="prenom">prenom :</label>
+                <label class="bloc__form__label--font1" for="adresse">adresse :</label>
+            </div>
+            <div class="bloc__form--flex2 bloc__form--padding ">
+                <input id="email" class="bloc__form__input--border" type="email">
+                <input id="nom" class="bloc__form__input--border" type="text">
+                <input id="prenom" class="bloc__form__input--border" type="text">
+                <textarea id="adresse" class="bloc__form__input--border " cols="30" rows="10"></textarea>
+            </div>
+        </form>
+
+
+        <div class="bloc__button--flex bloc__button--padding ">
+            <button class="bloc__section_4__button--style" type="submit">Commander</button>
+        </div>
+
+
+        <footer class="bloc__footer--border ">
+            <a href="index.html ">
+                <div class="bloc__footer--flex ">
+                    <img class="bloc__footer__img--seize " src="/images/icon-orinoco.png " alt="logo de la boutique en ligne Orinoco ">
+                    <h2 class="bloc__section__header--font ">Orinoco</h2>
+                </div>
+            </a>
+
+            <div class="bloc__footer__div--flex ">
+                <a target="_blank" href="https://www.facebook.com/ "><i class="bloc__footer__lien--color fab fa-facebook-square fa-4x "></i></a>
+                <a target="_blank" href="https://twitter.com "><i class="bloc__footer__lien--color fab fa-twitter-square fa-4x "></i></a>
+                <a target="_blank" href="https://www.instagram.com "><i class="bloc__footer__lien--color fab fa-instagram-square fa-4x "></i></a>
+            </div>
+
+        </footer>
+    </main>
+
+    <script src="/frontoffice/ressources/js/request.js"></script>
+    <script src="https://kit.fontawesome.com/ae33dc5524.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
