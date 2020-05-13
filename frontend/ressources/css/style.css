@@ -1,11 +1,11 @@
     @font-face {
         font-family: "belligerent";
-        src: url(/frontoffice/ressources/fonts/belligerent.ttf);
+        src: url(/frontend/ressources/fonts/belligerent.ttf);
     }
     
     @font-face {
         font-family: "roboto";
-        src: url(/frontoffice/ressources/fonts/Roboto-Regular.ttf);
+        src: url(/frontend/ressources/fonts/Roboto-Regular.ttf);
     }
     
     html {
@@ -72,6 +72,9 @@
     
     .bloc__section--padding {
         padding-bottom: 3em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     
     .bloc__section__div--flex {
@@ -88,7 +91,8 @@
     }
     
     .bloc__section__article--border {
-        margin: auto;
+        margin-bottom: 2em;
+        width: 50%;
         border: solid 4px var(--violet);
     }
     
