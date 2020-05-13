@@ -28,6 +28,8 @@ fetch('http://localhost:3000/api/teddies/')
             newName.innerHTML = rep[i].name;
             newLien.appendChild(newName);
 
+
+
             console.log(rep[i]);
         };
     });
