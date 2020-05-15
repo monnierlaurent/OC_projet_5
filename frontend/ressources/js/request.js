@@ -45,7 +45,7 @@ const listproduits = async function() {
             console.error('retour du serveur : ', response.status);
         };
 
-    } catch {
+    } catch (e) {
 
         console.log(e);
     };
