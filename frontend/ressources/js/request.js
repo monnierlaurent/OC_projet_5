@@ -1,46 +1,56 @@
 let urlJson = 'http://localhost:3000/api/teddies/';
 
 const listproduits = async function() {
-    let response = await fetch('http://localhost:3000/api/teddies/');
 
-    if (response.ok) {
-        let data = await response.json().then(function(data, i) {
-            for (i = 0; i < data.length; i++) {
+    try {
+        let response = await fetch(urlJson);
 
-                let sectionProduit = document.getElementById('page_items');
+        if (response.ok) {
 
-                const newArticle = document.createElement('article');
-                newArticle.setAttribute('class', 'bloc__section__article--border');
-                sectionProduit.appendChild(newArticle);
+            let data = await response.json().then(function(data, i) {
 
-                const newLien = document.createElement('a');
-                newLien.setAttribute('class', 'bloc__section__article--flex');
-                newLien.setAttribute('href', 'orinoco_page_produit.html#' + data[i]._id);
-                newArticle.appendChild(newLien);
+                for (i = 0; i < data.length; i++) {
 
-                const newImg = document.createElement('img');
-                newImg.setAttribute('class', 'bloc__section__article--image');
-                newImg.setAttribute('src', data[i].imageUrl);
-                newLien.appendChild(newImg);
+                    let sectionProduit = document.getElementById('page_items');
 
-                const newName = document.createElement('h2');
-                newName.setAttribute('class', 'bloc__section__heading--font');
-                newName.innerHTML = data[i].name;
-                newLien.appendChild(newName);
+                    const newArticle = document.createElement('article');
+                    newArticle.setAttribute('class', 'bloc__section__article--border');
+                    sectionProduit.appendChild(newArticle);
 
-                const newParag = document.createElement('p');
-                newParag.setAttribute('class', 'bloc__section__heading--font');
-                newParag.innerHTML = data[i].price + '€';
-                newLien.appendChild(newParag);
+                    const newLien = document.createElement('a');
+                    newLien.setAttribute('class', 'bloc__section__article--flex');
+                    newLien.setAttribute('href', 'orinoco_page_produit.html#' + data[i]._id);
+                    newArticle.appendChild(newLien);
 
-                console.log(data[i]);
-            };
-        });
+                    const newImg = document.createElement('img');
+                    newImg.setAttribute('class', 'bloc__section__article--image');
+                    newImg.setAttribute('src', data[i].imageUrl);
+                    newLien.appendChild(newImg);
 
-    } else {
-        console.error('retour du serveur : ', response.status);
+                    const newName = document.createElement('h2');
+                    newName.setAttribute('class', 'bloc__section__heading--font');
+                    newName.innerHTML = data[i].name;
+                    newLien.appendChild(newName);
+
+                    const newParag = document.createElement('p');
+                    newParag.setAttribute('class', 'bloc__section__heading--font');
+                    newParag.innerHTML = data[i].price + '€';
+                    newLien.appendChild(newParag);
+
+                    console.log(data[i]);
+                };
+            });
+
+        } else {
+            console.error('retour du serveur : ', response.status);
+        };
+
+    } catch {
+
+        console.log(e);
     };
 };
+
 
 
 listproduits();
