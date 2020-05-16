@@ -311,3 +311,7 @@
     .bloc__table--padding {
         padding-right: 0.9em;
     }
+    
+    .bloc__section_2__option--font {
+        font-family: "roboto", sans-serif;
+    }

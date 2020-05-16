@@ -5,7 +5,7 @@ const id = hash.replace("#", ""); // On reformate le "hash" pour lui enlever le 
 const url = 'http://localhost:3000/api/teddies/' + id; // L'URL chargée sera celle corresponda
 
 
-const afficherproduits = async function(data2) {
+const afficherproduits = async function() {
 
     try {
 
@@ -37,12 +37,12 @@ const afficherproduits = async function(data2) {
 
                 const newPrice = document.createElement('p');
                 paragraphe.appendChild(newPrice);
-                newPrice.innerHTML = '<br>' + data2.price + '€';
+                newPrice.innerHTML = '<br>prix : ' + data2.price + '€';
 
                 let divSelect = document.getElementById("select_color");
                 const newLabel = document.createElement('label');
                 newLabel.setAttribute('class', 'bloc__section_2__label--font');
-                newLabel.innerHTML = 'selectionner une couleur :';
+                newLabel.innerHTML = 'selectionnez une couleur : ';
                 divSelect.appendChild(newLabel);
 
                 const newSelect = document.createElement('select');
@@ -51,10 +51,19 @@ const afficherproduits = async function(data2) {
 
                 for (b = 0; b < data2.colors.length; b++) {
                     const newOption = document.createElement('option');
+                    newOption.setAttribute('class', 'bloc__section_2__option--font');
                     newOption.setAttribute('value', '');
                     newOption.innerHTML = data2.colors[b];
                     newSelect.appendChild(newOption);
                 };
+
+                let divbutton = document.getElementById("panier_ajout");
+                const newbutton = document.createElement('a');
+                newbutton.setAttribute('class', 'bloc__section_2__button--style');
+                newbutton.setAttribute('href', 'orinoco_panier.html#' + data2._id);
+                newbutton.innerHTML = 'Ajoutez au panier';
+                divbutton.appendChild(newbutton);
+
 
                 console.log(data2[i]);
 
@@ -73,20 +82,3 @@ const afficherproduits = async function(data2) {
 
 
 afficherproduits();
-
-// creation de la seclection de la couleur
-
-
-/*let divSelect = document.getElementById("select_color");
-
-const newLabel = document.createElement('label');
-newLabel.setAttribute('class', 'bloc__section_2__label--font');
-newLabel.innerHTML = 'selectionner une couleur :';
-divSelect.appendChild(newLabel);
-
-const newSelect = document.createElement('select');
-newSelect.setAttribute('class', 'bloc__section_2__select--font');
-newLabel.appendChild(newSelect);
-
-const newOption = document.createElement('option');
-newOption.setAttribute('value', '');*/
