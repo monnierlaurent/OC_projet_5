@@ -16,45 +16,23 @@ const afficherproduits = async function() {
 
             let data = await response.json().then(function(data2, i) {
 
-                let header = document.getElementById("nom_produit");
-                const newName = document.createElement('h2');
-                newName.setAttribute('class', 'bloc__section__header--font');
-                header.appendChild(newName);
-                newName.innerHTML = data2.name;
+                let nameProduct = document.getElementById("name_produit").innerHTML = data2.name;
 
-                let image = document.getElementById("image_produit");
-                const newImage = document.createElement('img');
-                newImage.setAttribute('class', 'bloc__section_2__img--seize');
-                newImage.setAttribute('src', data2.imageUrl);
-                newImage.setAttribute('alt', "photo de l'ourson");
-                image.appendChild(newImage);
-                newImage.innerHTML = data2.description;
+                let imageproduct = document.getElementById("image_produit");
+                imageproduct.setAttribute('class', 'bloc__section_2__img--seize');
+                imageproduct.setAttribute('src', data2.imageUrl);
 
-                let paragraphe = document.getElementById("description_produit");
-                const newDescription = document.createElement('p');
-                paragraphe.appendChild(newDescription);
-                newDescription.innerHTML = data2.description;
+                let descriptionProduct = document.getElementById("description_produit").innerHTML = data2.description;
 
-                const newPrice = document.createElement('p');
-                paragraphe.appendChild(newPrice);
-                newPrice.innerHTML = '<br>prix : ' + data2.price + '€';
-
-                let divSelect = document.getElementById("select_color");
-                const newLabel = document.createElement('label');
-                newLabel.setAttribute('class', 'bloc__section_2__label--font');
-                newLabel.innerHTML = 'selectionnez une couleur : ';
-                divSelect.appendChild(newLabel);
-
-                const newSelect = document.createElement('select');
-                newSelect.setAttribute('class', 'bloc__section_2__select--font');
-                newLabel.appendChild(newSelect);
+                let priceProduct = document.getElementById("prix-produit").innerHTML = '<br>prix :' + ' ' + data2.price + '€';
 
                 for (b = 0; b < data2.colors.length; b++) {
+                    let selectColor = document.getElementById('select_color');
                     const newOption = document.createElement('option');
                     newOption.setAttribute('class', 'bloc__section_2__option--font');
                     newOption.setAttribute('value', '');
                     newOption.innerHTML = data2.colors[b];
-                    newSelect.appendChild(newOption);
+                    selectColor.appendChild(newOption);
                 };
 
                 let divbutton = document.getElementById("panier_ajout");

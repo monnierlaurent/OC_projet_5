@@ -8,10 +8,7 @@ const url = 'http://localhost:3000/api/teddies/' + id; // L'URL chargée sera ce
 const afficherproduits = async function() {
 
     try {
-
         let response = await fetch(url);
-
-
         if (response.ok) {
 
             let data = await response.json().then(function(data3, i) {
@@ -55,7 +52,6 @@ const afficherproduits = async function() {
                 tableauTotalPrice.appendChild(newTd6);
                 newTd6.innerHTML = data3.price + '€';
 
-
                 console.log(data3[i]);
 
             });
@@ -69,7 +65,6 @@ const afficherproduits = async function() {
         console.log(e);
     };
 };
-
 
 
 afficherproduits();
