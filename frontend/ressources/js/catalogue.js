@@ -1,54 +1,44 @@
-let produit1 = document.getElementById("produit_1"); // récupration de l'id du produit 1
-let produit2 = document.getElementById("produit_2"); // récupration de l'id du produit 2
-let produit3 = document.getElementById("produit_3"); // récupration de l'id du produit 3
-let produit4 = document.getElementById("produit_4"); // récupration de l'id du produit 4
-let produit5 = document.getElementById("produit_5"); // récupration de l'id du produit 5
+function createCatalog() {
+    const datas = request('http://localhost:3000/api/teddies/');
+    datas.then(products => {
+        products.forEach(product => {
+            let sectionProduit = document.getElementById('page_items');
 
-let api = "http://localhost:3000/api/teddies"; // definitin de l'adresse de l'api
+            const newArticle = document.createElement('article');
+            newArticle.setAttribute('class', 'bloc__section__article--border');
+            sectionProduit.appendChild(newArticle);
 
-const ids = { // tableau ordonné stockant les "_id" des produit stocké dans l'api 
-    id_1: "5be9c8541c9d440000665243",
-    id_2: "5beaa8bf1c9d440000a57d94",
-    id_3: "5beaaa8f1c9d440000a57d95",
-    id_4: "5beaabe91c9d440000a57d96",
-    id_5: "5beaacd41c9d440000a57d97",
+            const newLien = document.createElement('a');
+            newLien.setAttribute('class', 'bloc__section__article--flex');
+            newLien.setAttribute('href', 'orinoco_page_produit.html#' + product._id);
+            newArticle.appendChild(newLien);
+
+            const newImg = document.createElement('img');
+            newImg.setAttribute('class', 'bloc__section__article--image');
+            newImg.setAttribute('src', product.imageUrl);
+            newLien.appendChild(newImg);
+
+            const newName = document.createElement('h2');
+            newName.setAttribute('class', 'bloc__section__heading--font');
+            newName.innerHTML = product.name;
+            newLien.appendChild(newName);
+
+            const newParag = document.createElement('p');
+            newParag.setAttribute('class', 'bloc__section__heading--font bloc__section__flex');
+            let number1 = product.price / 100;
+            newParag.innerHTML = number1.toLocaleString('fr-FR', {
+                style: "currency",
+                currency: "EUR"
+            });
+            newLien.appendChild(newParag);
+
+            const newbutton = document.createElement('a');
+            newbutton.setAttribute('class', 'bloc__section_2__button_2--style');
+            newbutton.setAttribute('href', 'orinoco_page_produit.html#' + product._id);
+            newbutton.innerHTML = 'Détail';
+            newParag.appendChild(newbutton);
+        });
+    });
 };
 
-// produit 1
-produit1.addEventListener("click", function() { // ecouter le click sur l'article du produit 1
-    let request = new XMLHttpRequest();
-
-    request.onreadystatechange = function() {
-
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            let responseProduit1 = JSON.parse(this.responseText);
-
-            console.log(responseProduit1.name);
-
-        };
-
-    };
-
-    request.open("GET", "http://localhost:3000/api/teddies/" + ids.id_1);
-    request.send();
-});
-
-// produit 2
-
-produit2.addEventListener("click", function() { // ecouter le click sur l'article du produit 2
-    let request = new XMLHttpRequest();
-
-    request.onreadystatechange = function() {
-
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            let responseProduit2 = JSON.parse(this.responseText);
-
-            console.log(responseProduit2.name);
-
-        };
-
-    };
-
-    request.open("GET", "http://localhost:3000/api/teddies/" + ids.id_2);
-    request.send();
-});
+createCatalog();

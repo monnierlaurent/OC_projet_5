@@ -146,6 +146,35 @@
         padding-right: 1em;
         padding-bottom: 0.5em;
     }
+    
+    .bloc__section__flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .bloc__section_2__button_2--style {
+        margin-top: 0.5em;
+        font-family: "belligerent";
+        font-size: 1em;
+        background-color: var(--violet2);
+        border-radius: 20px;
+        border: solid 3px var(--violet);
+        padding: 0.1em 0.5em 0.1em 0.5em;
+    }
+    
+    .bloc__section_2__button_2--style:active {
+        background-color: var(--rose);
+        border: solid 3px var(--violet2);
+    }
+    
+    .bloc__table__button--style:hover,
+    .bloc__section_2__button--style:hover,
+    .bloc__section_4__button--style:hover,
+    .bloc__section_2__button_2--style:hover {
+        opacity: 0.8;
+    }
     /*-----page produit-----*/
     
     .bloc__section_2__div--flex {
