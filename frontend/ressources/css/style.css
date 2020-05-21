@@ -344,3 +344,21 @@
     .bloc__section_2__option--font {
         font-family: "roboto", sans-serif;
     }
+    /*-----erreur-----*/
+    
+    .bloc__heading_erreur {
+        width: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .bloc__heading_erreur--detail {
+        margin: 2em 0 2em 0;
+        font-family: "belligerent";
+        font-size: 3em;
+        background-color: var(--violet2);
+        padding: 4em;
+        border-radius: 10px;
+        box-shadow: 5px 5px 10px var(--noir);
+    }
