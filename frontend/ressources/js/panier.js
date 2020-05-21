@@ -52,7 +52,6 @@ function createProductPanier() {
         const newTd6 = document.createElement('td');
         newTd6.setAttribute('class', 'bloc__table--align bloc__table--padding');
         tableauTotalPrice.appendChild(newTd6);
-
         newTd6.innerHTML = number3.toLocaleString('fr-FR', {
             style: "currency",
             currency: "EUR"

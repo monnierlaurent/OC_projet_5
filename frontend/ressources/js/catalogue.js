@@ -1,6 +1,7 @@
 function createCatalog() {
     const datas = request('http://localhost:3000/api/teddies/');
     datas.then(products => {
+
         products.forEach(product => {
             let sectionProduit = document.getElementById('page_items');
 
