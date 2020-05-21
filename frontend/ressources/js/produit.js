@@ -11,6 +11,24 @@ function createProduct() {
     datas.then(products => {
 
         try {
+            //--------------------------------------------------------------
+            class objProduct {
+                constructor(id, name, price) {
+                    this.id = id;
+                    this.name = name;
+                    this.price = price;
+                };
+                decrire() {
+                    return `${this.id}${this.name}${this.price}`;
+                };
+            };
+            const prod = new objProduct(products._id, products.name, products.price);
+            const prod2 = JSON.stringify(prod);
+            //const prodRetour = JSON.parse(prod2);
+
+            console.log(prod2);
+            //----------------------------------------------------------------
+
             document.getElementById("name_produit").innerHTML = products.name;
 
             let imageproduct = document.getElementById("image_produit");
@@ -49,3 +67,18 @@ function createProduct() {
 };
 
 createProduct();
+/*let products;
+class produits {
+    constructor(id, name, price) {
+        this.id = products._id;
+        this.name = products.name;
+        this.price = products.price;
+    }
+    obj() {
+        return `${this.id} ${this.name}${this.price}`
+    };
+};
+
+const objt = new produits(products._id, products.name, products.price);
+
+console.log(obj1.obj());*/

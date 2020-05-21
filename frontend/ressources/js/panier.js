@@ -7,6 +7,27 @@ const urlProduct = 'http://localhost:3000/api/teddies/' + id; // L'URL chargée 
 function createProductPanier() {
     const datas = request(urlProduct);
     datas.then(products => {
+
+        //--------------------------------------------------------------
+        class objProduct {
+            constructor(id, name, price) {
+                this.id = id;
+                this.name = name;
+                this.price = price;
+            };
+            decrire() {
+                return `${this.id}${this.name}${this.price}`;
+            };
+        };
+        const prod = new objProduct(products._id, products.name, products.price);
+
+        const prod2 = localStorage.setItem('retour', JSON.stringify(prod));
+
+        //const prodRetour = JSON.parse(prod2);
+
+        console.log(prod2);
+        //----------------------------------------------------------------
+
         let number3 = products.price / 100;
 
         let tableauProduit = document.getElementById("panier_produit");
