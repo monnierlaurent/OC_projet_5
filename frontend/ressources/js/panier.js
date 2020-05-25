@@ -12,8 +12,6 @@ function createPanier() {
 
         let storage = localStorage.length;
 
-
-
         for (let i = 0; i < storage; i++) {
 
             //creation d'un class pour recuper les infos produit necesaire au la creation de la ligne du panier
@@ -76,11 +74,10 @@ function createPanier() {
             newTd4.appendChild(newButton);
             newButton.innerHTML = 'supprimer';
 
-
-        };
+        }; // fin de la boucle for
         console.log(localStorage);
-    });
-};
+    }); // fin de then
+}; // fin de createPanier
 
 createPanier();
 
