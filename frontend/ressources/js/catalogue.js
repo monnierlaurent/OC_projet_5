@@ -2,7 +2,10 @@ function createCatalog() {
     const datas = request('http://localhost:3000/api/teddies/');
     datas.then(products => {
 
+
+
         products.forEach(product => {
+
             let sectionProduit = document.getElementById('page_items');
 
             const newArticle = document.createElement('article');
@@ -26,8 +29,8 @@ function createCatalog() {
 
             const newParag = document.createElement('p');
             newParag.setAttribute('class', 'bloc__section__heading--font bloc__section__flex');
-            let number1 = product.price / 100;
-            newParag.innerHTML = number1.toLocaleString('fr-FR', {
+            let prices = product.price / 100;
+            newParag.innerHTML = prices.toLocaleString('fr-FR', {
                 style: "currency",
                 currency: "EUR"
             });
@@ -38,8 +41,15 @@ function createCatalog() {
             newbutton.setAttribute('href', 'orinoco_page_produit.html#' + product._id);
             newbutton.innerHTML = 'Détail';
             newParag.appendChild(newbutton);
+
+
         });
+
     });
+
 };
+
+
+
 
 createCatalog();
