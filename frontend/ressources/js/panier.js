@@ -1,38 +1,26 @@
 const hash = window.location.hash; // On créé une variable "hash" qui correspond au hash de l'URL qui a été chargée par l'utilisateur
 const id = hash.replace("#", ""); // On reformate le "hash" pour lui enlever le symbole "#"
-const urlProduct = 'http://localhost:3000/api/teddies/' + id; // L'URL chargée sera celle correspondant
-
-
-
-
+const urlProduct = 'http://localhost:3000/api/teddies/' + id; // L'URL chargée sera celle corresponda
 
 function createPanier() {
     const datas = request(urlProduct);
     datas.then(products => {
 
-        let storage = localStorage.length;
+        storage = localStorage.length;
+        idProduit = products._id;
 
-        for (let i = 0; i < storage; i++) {
+        let stockObjJson = JSON.stringify(products);
+        localStorage.setItem(idProduit, stockObjJson);
 
-            //creation d'un class pour recuper les infos produit necesaire au la creation de la ligne du panier
-            class produitPanier {
-                constructor(id, name, price) {
-                    this.id = id;
-                    this.name = name;
-                    this.price = price;
-                };
-            };
 
-            const newObj = new produitPanier(products._id, products.name, products.price); // creation d'une instance avec les élements du produit
+        for (let i = 0; i < storage; ++i) {
 
-            let newObjJson = JSON.stringify(newObj); // transformation de l'instance creer en chaine de caractere pour la stocker en local
-            localStorage.setItem(products._id, newObjJson); // mise en memoire local du produit avec sont _id comme KEY
-            let newObjConst = localStorage.getItem(products._id);
+            let objStorageRecup = localStorage.getItem(localStorage.key(i));
+            let objJsonParse = JSON.parse(objStorageRecup);
 
-            let objParse = JSON.parse(newObjConst);
-            console.log(objParse);
+            console.log(objJsonParse);
 
-            let prices = objParse.price / 100;
+            let prices = objJsonParse.price / 100;
 
             let tableauProduit = document.getElementById("panier_produit");
 
@@ -41,7 +29,7 @@ function createPanier() {
 
             const newTd = document.createElement('td');
             newTr.appendChild(newTd);
-            newTd.innerHTML = objParse.name;
+            newTd.innerHTML = objJsonParse.name;
 
             const newTd1 = document.createElement('td');
             newTd1.setAttribute('class', 'bloc__table--align');
@@ -74,31 +62,9 @@ function createPanier() {
             newTd4.appendChild(newButton);
             newButton.innerHTML = 'supprimer';
 
-        }; // fin de la boucle for
+        };
         console.log(localStorage);
-    }); // fin de then
-}; // fin de createPanier
+    });
+};
 
 createPanier();
-
-/*----------------------------
-let ecoutebutton = document.getElementById('delete_items');
-
-function deleteElementPanier() {
-    ecoutebutton.classList.add('deleteItem');
-};
-ecoutebutton.addEventListener('click', deleteElementPanier());
-//----------------------------*/
-
-/*let tableauTotalPrice = document.getElementById("total_panier");
-                        const newTd5 = document.createElement('td');
-                        tableauTotalPrice.appendChild(newTd5);
-                        newTd5.innerHTML = 'Total de la commande';
-
-                        const newTd6 = document.createElement('td');
-                        newTd6.setAttribute('class', 'bloc__table--align bloc__table--padding');
-                        tableauTotalPrice.appendChild(newTd6);
-                        newTd6.innerHTML = prices.toLocaleString('fr-FR', {
-                            style: "currency",
-                            currency: "EUR"
-                        });*/
