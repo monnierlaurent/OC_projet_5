@@ -4,13 +4,10 @@
 
 
 async function request(url) {
-    try {
-        let response = await fetch(url);
-        let data = await response.json();
-        return data;
-    } catch {
-        document.location.href = "/frontend/erreur.html";
-    };
+
+    let response = await fetch(url);
+    let data = await response.json();
+    return data;
 };
 
 

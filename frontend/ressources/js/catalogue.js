@@ -3,8 +3,10 @@ function createCatalog() {
     datas.then(products => {
 
 
-
         products.forEach(product => {
+
+            let url = new URL('http://127.0.0.1:5500/frontend/orinoco_page_produit.html/scearch?id=' + product._id + '&' + product.name);
+            let querystring = url.search;
 
             let sectionProduit = document.getElementById('page_items');
 
@@ -12,10 +14,11 @@ function createCatalog() {
             newArticle.setAttribute('class', 'bloc__section__article--border');
             sectionProduit.appendChild(newArticle);
 
-            const newLien = document.createElement('a');
-            newLien.setAttribute('class', 'bloc__section__article--flex');
-            newLien.setAttribute('href', 'orinoco_page_produit.html#' + product._id);
+            const newLien = document.createElement('div');
+            newLien.setAttribute('class', 'bloc__section__article--flex lien');
             newArticle.appendChild(newLien);
+
+
 
             const newImg = document.createElement('img');
             newImg.setAttribute('class', 'bloc__section__article--image');
@@ -36,20 +39,20 @@ function createCatalog() {
             });
             newLien.appendChild(newParag);
 
-            const newbutton = document.createElement('a');
-            newbutton.setAttribute('class', 'bloc__section_2__button_2--style');
-            newbutton.setAttribute('href', 'orinoco_page_produit.html#' + product._id);
+            const newbutton = document.createElement('div');
+            newbutton.setAttribute('class', 'bloc__section_2__button_2--style lien');
             newbutton.innerHTML = 'Détail';
             newParag.appendChild(newbutton);
 
+            let lienProduit = document.querySelector('.lien');
+            lienProduit.addEventListener('click', function() {
+                document.location.href = querystring;
+            });
 
-        });
-
-    });
-
-};
-
-
-
+        }); // fin boucle
+    }) /*fin promesse*/ .catch((err => {
+        document.location.href = 'http://127.0.0.1:5500/frontend/erreur.html';
+    })); // fin cath
+}; // fin function
 
 createCatalog();

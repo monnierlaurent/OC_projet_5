@@ -96,6 +96,10 @@
         border: solid 4px var(--violet);
     }
     
+    .bloc__section__article--border:hover {
+        opacity: 0.7;
+    }
+    
     .bloc__section__article--flex {
         background-color: #fff;
         padding: 2em 1em 2em 1em;
