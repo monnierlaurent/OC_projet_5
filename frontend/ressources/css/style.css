@@ -223,6 +223,7 @@
         border-radius: 20px;
         border: solid 3px var(--violet);
         padding: 0.3em;
+        text-align: center;
     }
     
     .bloc__section_2__button--style:active,
