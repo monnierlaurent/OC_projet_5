@@ -11,6 +11,8 @@ if (position != -1) { // si different de non presence de ?
     idProduit = fin_url.substr(0);
     let urlProduct = 'http://localhost:3000/api/teddies/' + idProduit; // L'URL chargée sera celle correspondante au produit
 
+    console.log(idProduit);
+
     function createProduct() {
         const datas = request(urlProduct);
         datas.then(products => {
@@ -18,7 +20,7 @@ if (position != -1) { // si different de non presence de ?
             //console.log(products);
             document.querySelector('title').innerHTML = 'Orinoco/Teddies/' + products.name;
 
-            document.getElementById("name_produit").innerHTML = products.name;
+            document.getElementById("name_produit").innerText = products.name;
 
             let imageproduct = document.getElementById("image_produit");
             imageproduct.setAttribute('class', 'bloc__section_2__img--seize');
@@ -50,20 +52,20 @@ if (position != -1) { // si different de non presence de ?
 
             //---------------------------
             let lienPanier = document.getElementById('lienPanier');
-            lienPanier.addEventListener('click', function() {
+            lienPanier.addEventListener('click', function(event) {
 
-                const prod = {
+                const order = {
+                    _id: idProduit,
                     name: products.name,
-                    price: products.price,
+                    price: products.price
                 };
 
-                let newInstJson = JSON.stringify(prod);
-
-                localStorage.setItem(products._id, newInstJson);
+                let newObjJson = JSON.stringify(order);
+                localStorage.setItem(localStorage.length, newObjJson);
 
                 window.location = 'orinoco_panier.html';
             }); //fin funtion 'click'
-
+            console.log(localStorage);
         }).catch((error => {
             console.log('erreur');
         })); // fin cath

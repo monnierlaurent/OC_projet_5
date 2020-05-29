@@ -1,6 +1,5 @@
 storage = localStorage.length;
 
-
 for (let i = 0; i < storage; ++i) {
 
     let objStorageRecup = localStorage.getItem(localStorage.key(i));
@@ -61,15 +60,29 @@ totalProduit.appendChild(deleteButton);
 deleteButton.innerHTML = 'supprimer'
 
 let totalDelete = document.getElementById('total_panier');
-totalDelete.addEventListener('click', function() {
-    localStorage.removeItem(localStorage.key);
-    alert('delete');
+totalDelete.addEventListener('click', function(i) {
+    localStorage.removeItem(localStorage.key(i));
+    //alert('delete');
 });
 
-console.log(localStorage);
+//console.log(localStorage);
+
+
 // function delete produit du panier
 function clicker() {
-    alert('cliquer!!!');
-    //let deletePro = document.getElementById('bloc-tr');
-    //deletePro.classList.add('deleteItem');
+    //alert('cliquer!!!');
+    localStorage.getItem(localStorage.key(i));
+
 };
+
+let prenon = document.getElementById('prenom').value;
+let nom = document.getElementById('nom').value;
+let adresse = document.getElementById('adresse').value;
+let ville = document.getElementById('ville').value;
+let email = document.getElementById('email').value;
+
+//console.log(prenom.value);
+//console.log(nom.value);
+//console.log(adresse.value);
+//console.log(ville.value);
+//console.log(email.value);
