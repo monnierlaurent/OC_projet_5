@@ -5,7 +5,7 @@ for (let i = 0; i < storage; ++i) {
     let objStorageRecup = localStorage.getItem(localStorage.key(i));
     let objJsonParse = JSON.parse(objStorageRecup);
 
-    console.log(objJsonParse);
+    //console.log(objJsonParse);
 
     let prices = objJsonParse.price / 100;
 
@@ -74,15 +74,36 @@ function clicker() {
     localStorage.getItem(localStorage.key(i));
 
 };
+//-------------tableau panier------------
+const product_id = [localStorage];
+//-------------formulaire----------------
 
-let prenon = document.getElementById('prenom').value;
-let nom = document.getElementById('nom').value;
-let adresse = document.getElementById('adresse').value;
-let ville = document.getElementById('ville').value;
-let email = document.getElementById('email').value;
 
-//console.log(prenom.value);
-//console.log(nom.value);
-//console.log(adresse.value);
-//console.log(ville.value);
-//console.log(email.value);
+
+
+// button commander + objet contact
+function clicker2() {
+    let inputPrenon = document.getElementById('prenom').value;
+    let inputNom = document.getElementById('nom').value;
+    let inputAdresse = document.getElementById('adresse').value;
+    let inputVille = document.getElementById('ville').value;
+    let inputEmail = document.getElementById('email').value;
+
+
+    const contact = {
+        prenon: inputPrenon,
+        nom: inputNom,
+        adresse: inputAdresse,
+        ville: inputVille,
+        email: inputEmail
+    };
+    console.log(contact);
+};
+
+let btnCommande = document.getElementById('envoyer_commande');
+
+btnCommande.addEventListener('click', clicker2);
+
+
+
+console.log(product_id);
