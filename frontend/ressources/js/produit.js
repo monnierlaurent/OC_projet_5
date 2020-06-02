@@ -73,20 +73,3 @@ if (position != -1) { // si different de non presence de ?
 }; // fin de if
 
 createProduct();
-
-//-----class objet-----
-
-
-
-
-
-
-
-
-
-
-
-
-//const hash = window.location.hash; // On créé une variable "hash" qui correspond au hash de l'URL qui a été chargée par l'utilisateur
-//const id = hash.replace("?id", ""); // On reformate le "hash" pour lui enlever le symbole "#"
-//const urlProduct = 'http://localhost:3000/api/teddies/' + id; // L'URL chargée sera celle corresponda

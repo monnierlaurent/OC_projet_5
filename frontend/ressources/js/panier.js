@@ -47,11 +47,12 @@ for (let i = 0; i < storage; ++i) {
     const newButton = document.createElement('button');
 
     newButton.setAttribute('class', 'bloc__table__button--style');
-    newButton.setAttribute('onclick', 'clicker()');
+    //newButton.setAttribute('onclick', 'clicker()');
     newTd4.appendChild(newButton);
     newButton.innerHTML = 'supprimer'
 
 }; // fin de boucle for
+
 let totalProduit = document.getElementById('total_panier');
 const deleteButton = document.createElement('button');
 deleteButton.setAttribute('class', 'bloc__table__button--style');
@@ -59,21 +60,7 @@ deleteButton.setAttribute('id', 'deleteTotalPanier');
 totalProduit.appendChild(deleteButton);
 deleteButton.innerHTML = 'supprimer'
 
-let totalDelete = document.getElementById('total_panier');
-totalDelete.addEventListener('click', function(i) {
-    localStorage.removeItem(localStorage.key(i));
-    //alert('delete');
-});
 
-//console.log(localStorage);
-
-
-// function delete produit du panier
-function clicker() {
-    //alert('cliquer!!!');
-    localStorage.getItem(localStorage.key(i));
-
-};
 //-------------tableau panier------------
 const product_id = [localStorage];
 //-------------formulaire----------------
@@ -82,14 +69,14 @@ const product_id = [localStorage];
 
 
 // button commander + objet contact
-function clicker2() {
+function createContact() {
     let inputPrenon = document.getElementById('prenom').value;
     let inputNom = document.getElementById('nom').value;
     let inputAdresse = document.getElementById('adresse').value;
     let inputVille = document.getElementById('ville').value;
     let inputEmail = document.getElementById('email').value;
 
-
+    // if objet vide alors message repliser la ligne.
     const contact = {
         prenon: inputPrenon,
         nom: inputNom,
@@ -102,8 +89,6 @@ function clicker2() {
 
 let btnCommande = document.getElementById('envoyer_commande');
 
-btnCommande.addEventListener('click', clicker2);
-
-
+btnCommande.addEventListener('click', createContact);
 
 console.log(product_id);
