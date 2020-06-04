@@ -1,11 +1,11 @@
     @font-face {
         font-family: "belligerent";
-        src: url(/frontend/ressources/fonts/belligerent.ttf);
+        src: url(../fonts/belligerent.ttf);
     }
     
     @font-face {
         font-family: "roboto";
-        src: url(/frontend/ressources/fonts/Roboto-Regular.ttf);
+        src: url(../fonts/Roboto-Regular.ttf);
     }
     
     html {

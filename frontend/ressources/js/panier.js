@@ -1,75 +1,97 @@
-storage = localStorage.length;
+//console.log(localStorage);
+function checkPanier() {
+    if (localStorage.length === 0) {
+        alert('le panier est vide'); // faire un veritable message d'erreur en html
+    } else {
+        createPanier()
+    };
+};
 
-for (let i = 0; i < storage; ++i) {
 
-    let objStorageRecup = localStorage.getItem(localStorage.key(i));
-    let objJsonParse = JSON.parse(objStorageRecup);
+function createPanier() {
 
-    //console.log(objJsonParse);
+    const tablePanier = [];
+    const storage = localStorage.length;
 
-    let prices = objJsonParse.price / 100;
+    for (let i = 0; i < storage; i++) {
+        const objJSON = localStorage.getItem(localStorage.key(i));
+        const objJsonParse = JSON.parse(objJSON);
+        tablePanier.push(objJsonParse);
+    };
 
-    let tableauProduit = document.getElementById('panier_produit');
+    tablePanier.forEach(panier => {
+        let tableauProduit = document.getElementById('panier_produit');
 
-    const newTr = document.createElement('tr');
-    newTr.setAttribute('id', 'bloc-tr');
-    tableauProduit.appendChild(newTr);
+        const newTr = document.createElement('tr');
+        newTr.setAttribute('id', 'bloc-tr');
+        tableauProduit.appendChild(newTr);
 
-    const newTd = document.createElement('td');
-    newTr.appendChild(newTd);
-    newTd.innerHTML = objJsonParse.name;
+        const newTd0 = document.createElement('td');
+        newTr.appendChild(newTd0);
+        newTd0.innerHTML = panier.key;
 
-    const newTd1 = document.createElement('td');
-    newTd1.setAttribute('class', 'bloc__table--align');
-    newTr.appendChild(newTd1);
-    newTd1.innerHTML = '1';
+        const newTd1 = document.createElement('td');
+        newTr.appendChild(newTd1);
+        newTd1.innerHTML = panier.name;
 
-    const newTd2 = document.createElement('td');
-    newTd2.setAttribute('class', 'bloc__table--align');
-    newTr.appendChild(newTd2);
-    newTd2.innerHTML = prices.toLocaleString('fr-FR', {
-        style: 'currency',
-        currency: 'EUR'
+        const newTd2 = document.createElement('td');
+        newTd2.setAttribute('class', 'bloc__table--align');
+        newTr.appendChild(newTd2);
+        newTd2.innerHTML = '1';
+
+        const newTd3 = document.createElement('td');
+        newTd3.setAttribute('class', 'bloc__table--align');
+        newTr.appendChild(newTd3);
+        newTd3.innerHTML = (panier.price / 100).toLocaleString('fr-FR', {
+            style: 'currency',
+            currency: 'EUR'
+        });
+
+        const newTd4 = document.createElement('td');
+        newTd4.setAttribute('class', 'bloc__table--align');
+        newTr.appendChild(newTd4);
+        newTd4.innerHTML = (panier.price / 100).toLocaleString('fr-FR', {
+            style: 'currency',
+            currency: 'EUR'
+        });
+
+        const newTd5 = document.createElement('td');
+        newTd5.setAttribute('class', 'bloc__table--align');
+        newTr.appendChild(newTd5);
+
+        const newButton = document.createElement('button');
+
+        newButton.setAttribute('class', 'bloc__table__button--style');
+        //newButton.setAttribute('onclick', 'clicker()');
+        newTd4.appendChild(newButton);
+        newButton.innerHTML = 'supprimer'
+
     });
-
-    const newTd3 = document.createElement('td');
-    newTd3.setAttribute('class', 'bloc__table--align');
-    newTr.appendChild(newTd3);
-    newTd3.innerHTML = prices.toLocaleString('fr-FR', {
-        style: 'currency',
-        currency: 'EUR'
-    });
-
-    const newTd4 = document.createElement('td');
-    newTd4.setAttribute('class', 'bloc__table--align');
-    newTr.appendChild(newTd4);
-
-    const newButton = document.createElement('button');
-
-    newButton.setAttribute('class', 'bloc__table__button--style');
-    //newButton.setAttribute('onclick', 'clicker()');
-    newTd4.appendChild(newButton);
-    newButton.innerHTML = 'supprimer'
-
-}; // fin de boucle for
-
-let totalProduit = document.getElementById('total_panier');
-const deleteButton = document.createElement('button');
-deleteButton.setAttribute('class', 'bloc__table__button--style');
-deleteButton.setAttribute('id', 'deleteTotalPanier');
-totalProduit.appendChild(deleteButton);
-deleteButton.innerHTML = 'supprimer'
+};
 
 
-//-------------tableau panier------------
-const product_id = [localStorage];
-//-------------formulaire----------------
+
+console.log(localStorage);
+
+
+checkPanier();
 
 
 
 
+
+
+
+
+
+
+/*
 // button commander + objet contact
 function createContact() {
+    //-------------tableau panier------------
+    const product_id = [localStorage];
+    //-------------formulaire----------------
+
     let inputPrenon = document.getElementById('prenom').value;
     let inputNom = document.getElementById('nom').value;
     let inputAdresse = document.getElementById('adresse').value;
@@ -90,5 +112,4 @@ function createContact() {
 let btnCommande = document.getElementById('envoyer_commande');
 
 btnCommande.addEventListener('click', createContact);
-
-console.log(product_id);
+*/
