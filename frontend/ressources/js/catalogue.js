@@ -1,4 +1,4 @@
-function createCatalog() {
+createCatalog = () => {
     const datas = request('http://localhost:3000/api/teddies/');
     datas.then(products => {
 
