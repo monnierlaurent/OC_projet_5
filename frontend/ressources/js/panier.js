@@ -1,4 +1,5 @@
 checkPanier = () => {
+
     if (localStorage.length === 0) {
         alert('le panier est vide'); // faire un veritable message d'erreur en html
     } else {
@@ -10,6 +11,13 @@ createPanier = () => {
 
     const tablePanier = [];
     const storage = localStorage.length;
+
+    /*Array.from(localStorage).forEach((toto) => {
+        const objJSON = localStorage.getItem(localStorage.key(i));
+        const objJsonParse = JSON.parse(objJSON);
+        tablePanier.push(objJsonParse);
+        console.log(toto);
+    });*/
 
     for (let i = 0; i < storage; i++) {
         const objJSON = localStorage.getItem(localStorage.key(i));
@@ -80,7 +88,6 @@ createPanier = () => {
             currency: 'EUR'
         });
     }); //fin forEach
-
 
     // formulaire pour commande
     const formClient = document.getElementById('formulaire');
@@ -175,7 +182,6 @@ createPanier = () => {
     newbtn2.innerHTML = 'Commander';
     newdiv2.appendChild(newbtn2);
 
-
     const totalProduit = document.getElementById('total_panier');
     const deleteButton = document.createElement('button');
     deleteButton.setAttribute('class', 'bloc__table__button--style');
@@ -184,6 +190,8 @@ createPanier = () => {
     totalProduit.appendChild(deleteButton);
     deleteButton.innerHTML = 'supprimer'
 
+
+    console.log(tablePanier);
 }; //fin de create panier
 
 checkPanier();

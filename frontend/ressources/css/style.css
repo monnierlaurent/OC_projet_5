@@ -351,23 +351,25 @@
     }
     /*-----erreur-----*/
     
-    .bloc__heading_erreur {
-        width: 100%;
-        margin: auto;
+    .bloc__heading_erreur--flex {
         display: flex;
         justify-content: center;
+        align-items: center;
+    }
+    
+    .bloc__heading_erreur {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .bloc__heading_erreur--detail {
         margin: 2em 0 2em 0;
         font-family: "belligerent";
-        font-size: 3em;
+        font-size: 1em;
         background-color: var(--violet2);
         padding: 4em;
         border-radius: 10px;
         box-shadow: 5px 5px 10px var(--noir);
-    }
-    
-    .deleteItem {
-        display: none;
     }
