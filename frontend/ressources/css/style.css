@@ -128,10 +128,6 @@
         color: var(--noir);
     }
     
-    .bloc__footer--border {
-        border-top: solid 4px var(--violet);
-    }
-    
     .bloc__footer__div--flex {
         display: flex;
         flex-direction: row;
@@ -287,20 +283,19 @@
     }
     
     .bloc__form__label--font {
-        margin-bottom: 1.5em;
+        margin-top: 0.9em;
         font-size: 1.5em;
     }
     
     .bloc__form__label--font1 {
-        padding-top: 0.8em;
-        margin-bottom: 1.5em;
+        padding-top: 2.1em;
         font-size: 1.5em;
     }
     
     .bloc__form__input--border {
         border: solid 3px var(--violet);
         border-radius: 5px;
-        margin-bottom: 2em;
+        margin-bottom: 1em;
         font-size: 1.5em;
     }
     
@@ -372,4 +367,9 @@
         padding: 4em;
         border-radius: 10px;
         box-shadow: 5px 5px 10px var(--noir);
+    }
+    /* erreur de saisie du formulaire*/
+    
+    .bloc__form--font--erreur {
+        color: red;
     }

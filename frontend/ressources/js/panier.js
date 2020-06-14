@@ -12,13 +12,6 @@ createPanier = () => {
     const tablePanier = [];
     const storage = localStorage.length;
 
-    /*Array.from(localStorage).forEach((toto) => {
-        const objJSON = localStorage.getItem(localStorage.key(i));
-        const objJsonParse = JSON.parse(objJSON);
-        tablePanier.push(objJsonParse);
-        console.log(toto);
-    });*/
-
     for (let i = 0; i < storage; i++) {
         const objJSON = localStorage.getItem(localStorage.key(i));
         const objJsonParse = JSON.parse(objJSON);
@@ -28,7 +21,7 @@ createPanier = () => {
     //total panier
     let result = 0;
 
-    tablePanier.forEach(total => {
+    tablePanier.reverse().forEach(total => {
         result += total.price / 100;
     });
 
@@ -75,19 +68,45 @@ createPanier = () => {
         newTr.appendChild(newTd5);
 
         const newButton = document.createElement('button');
-        newButton.setAttribute('id', 'btnDeleteO');
+        newButton.setAttribute('class', 'btnDeleteO');
         newButton.setAttribute('class', 'bloc__table__button--style');
-        newButton.setAttribute('onclick', 'deleteObjetPanier()');
         newButton.innerHTML = 'supprimer'
-        newTd4.appendChild(newButton);
+        newTd5.appendChild(newButton);
 
-        // boutton de suppression total du panier
+        //-----suppression produit------
 
-        document.getElementById('totalCommande').innerHTML = result.toLocaleString('fr-FR', {
-            style: 'currency',
-            currency: 'EUR'
+        newTd5.addEventListener('click', alertDelete => {
+            alert(panier.key);
+            localStorage.removeItem(panier.key);
+            tablePanier.sort();
+            location.reload(), false;
+
         });
     }); //fin forEach
+
+    // boutton de suppression total du panier
+    const totalProduit = document.getElementById('total_panier');
+    const newTrTotal = document.createElement('tr');
+    totalProduit.appendChild(newTrTotal);
+
+    const newTdTotal = document.createElement('td');
+    newTdTotal.setAttribute('id', 'totalCommande');
+    newTrTotal.appendChild(newTdTotal);
+    newTdTotal.innerHTML = result.toLocaleString('fr-FR', {
+        style: 'currency',
+        currency: 'EUR'
+    });
+
+    const deleteButton = document.createElement('button');
+    deleteButton.setAttribute('class', 'bloc__table__button--style');
+    deleteButton.setAttribute('id', 'deleteTotalPanier');
+    newTrTotal.appendChild(deleteButton);
+    deleteButton.innerHTML = 'supprimer'
+
+    deleteButton.addEventListener('click', deleteTotalPanier => {
+        localStorage.clear();
+        location.reload(), false;
+    });
 
     // formulaire pour commande
     const formClient = document.getElementById('formulaire');
@@ -120,6 +139,8 @@ createPanier = () => {
     newLabel4.innerHTML = 'Ville :';
     newdiv1.appendChild(newLabel4);
 
+
+
     const newLabel5 = document.createElement('label');
     newLabel5.setAttribute('class', 'bloc__form__label--font1');
     newLabel5.setAttribute('for', 'email');
@@ -130,49 +151,69 @@ createPanier = () => {
     newdiv2.setAttribute('class', 'bloc__form--flex2 bloc__form--padding');
     formClient.appendChild(newdiv2);
 
+    const newPargErreur1 = document.createElement('p');
+    newPargErreur1.setAttribute('id', 'erreur1');
+    newPargErreur1.innerText = '* champ obligatoire';
+    newdiv2.appendChild(newPargErreur1);
+
     const newInput1 = document.createElement('input');
     newInput1.setAttribute('id', 'prenom');
+    newInput1.setAttribute('name', 'prenom');
     newInput1.setAttribute('class', 'bloc__form__input--border');
     newInput1.setAttribute('type', 'text');
     newInput1.setAttribute('value', '');
-    newInput1.setAttribute('required', 'required');
-    newInput1.setAttribute('pattern', '[a-zA-Z\-]+');
     newdiv2.appendChild(newInput1);
+
+    const newPargErreur2 = document.createElement('p');
+    newPargErreur2.setAttribute('id', 'erreur2');
+    newPargErreur2.innerText = '* champ obligatoire';
+    newdiv2.appendChild(newPargErreur2);
 
     const newInput2 = document.createElement('input');
     newInput2.setAttribute('id', 'nom');
+    newInput2.setAttribute('name', 'nom');
     newInput2.setAttribute('class', 'bloc__form__input--border');
     newInput2.setAttribute('type', 'text');
     newInput2.setAttribute('value', '');
-    newInput2.setAttribute('required', 'required');
-    newInput1.setAttribute('pattern', '[A-Za-z\-]+');
     newdiv2.appendChild(newInput2);
+
+    const newPargErreur3 = document.createElement('p');
+    newPargErreur3.setAttribute('id', 'erreur3');
+    newPargErreur3.innerText = '* champ obligatoire';
+    newdiv2.appendChild(newPargErreur3);
 
     const newInput3 = document.createElement('input');
     newInput3.setAttribute('id', 'adresse');
+    newInput3.setAttribute('name', 'adresse');
     newInput3.setAttribute('class', 'bloc__form__input--border');
     newInput3.setAttribute('type', 'text');
     newInput3.setAttribute('value', '');
-    newInput3.setAttribute('required', 'required');
-    newInput1.setAttribute('pattern', '[A-Za-z0-9\-\,\.\(\)]+');
     newdiv2.appendChild(newInput3);
+
+    const newPargErreur4 = document.createElement('p');
+    newPargErreur4.setAttribute('id', 'erreur4');
+    newPargErreur4.innerText = '* champ obligatoire';
+    newdiv2.appendChild(newPargErreur4);
 
     const newInput4 = document.createElement('input');
     newInput4.setAttribute('id', 'ville');
+    newInput4.setAttribute('name', 'ville');
     newInput4.setAttribute('class', 'bloc__form__input--border');
     newInput4.setAttribute('type', 'text');
     newInput4.setAttribute('value', '');
-    newInput4.setAttribute('required', 'required');
-    newInput1.setAttribute('pattern', '[A-Za-z\-\.]+');
     newdiv2.appendChild(newInput4);
+
+    const newPargErreur5 = document.createElement('p');
+    newPargErreur5.setAttribute('id', 'erreur5');
+    newPargErreur5.innerText = '* champ obligatoire';
+    newdiv2.appendChild(newPargErreur5);
 
     const newInput5 = document.createElement('input');
     newInput5.setAttribute('id', 'email');
+    newInput5.setAttribute('name', 'email');
     newInput5.setAttribute('class', 'bloc__form__input--border');
     newInput5.setAttribute('type', 'email');
     newInput5.setAttribute('value', '');
-    newInput5.setAttribute('required', 'required');
-    //newInput1.setAttribute('pattern', '[a-z0-9\.]+');
     newdiv2.appendChild(newInput5);
 
     const newbtn2 = document.createElement('button');
@@ -182,49 +223,13 @@ createPanier = () => {
     newbtn2.innerHTML = 'Commander';
     newdiv2.appendChild(newbtn2);
 
-    const totalProduit = document.getElementById('total_panier');
-    const deleteButton = document.createElement('button');
-    deleteButton.setAttribute('class', 'bloc__table__button--style');
-    deleteButton.setAttribute('id', 'deleteTotalPanier');
-    deleteButton.setAttribute('onclick', 'deleteTotalPanier()');
-    totalProduit.appendChild(deleteButton);
-    deleteButton.innerHTML = 'supprimer'
-
-
-    console.log(tablePanier);
 }; //fin de create panier
 
 checkPanier();
 
-// effacer un objet selectionner du panier
-
-// probleme de suppression faire reconnaire la key produit pour supprimer le bon produit
-
-deleteObjetPanier = (i) => {
-    document.getElementById('btnDeleteO').addEventListener('click', location.reload(), false);
-    localStorage.removeItem(localStorage.key(i));
-};
-
-// vidage total du panier
-
-deleteTotalPanier = () => {
-    document.getElementById('deleteTotalPanier').addEventListener('click', location.reload(), false);
-    localStorage.clear();
-};
-
 // button commander + objet contact
 createContact = () => {
-
-    //-------------formulaire----------------
-
-    /*const inputPrenon = document.getElementById('prenom').value;
-    const inputNom = document.getElementById('nom').value;
-    const inputAdresse = document.getElementById('adresse').value;
-    const inputVille = document.getElementById('ville').value;
-    const inputEmail = document.getElementById('email').value;
-
-    // if objet vide alors message repliser la ligne.
-    const contact = {
+    /*const contact = {
         prenon: inputPrenon,
         nom: inputNom,
         adresse: inputAdresse,
@@ -234,5 +239,59 @@ createContact = () => {
     console.log(contact);
 */
 };
-const btnCommande = document.getElementById('envoyer_commande');
-btnCommande.addEventListener('click', createContact);
+
+
+validerForms = () => {
+
+    const btnEnvoi = document.getElementById('envoyer_commande');
+    const prenom = document.getElementById('prenom');
+    const nom = document.getElementById('nom');
+    const adresse = document.getElementById('adresse');
+    const ville = document.getElementById('ville');
+    const email = document.getElementById('email');
+
+    const paragErreur1 = document.getElementById('erreur1');
+    const paragErreur2 = document.getElementById('erreur2');
+    const paragErreur3 = document.getElementById('erreur3');
+    const paragErreur4 = document.getElementById('erreur4');
+    const paragErreur5 = document.getElementById('erreur5');
+
+    const regexNomPrenom = /^[a-zA-Z\-]+/;
+    const regexAdresse = /^[a-zA-Z0-9\-\,\:]+/;
+    const regexVille = /^[a-zA-Z\-]+/;
+    const regexEmail = /^[a-zA-Z1-9\-]+?@{1}[a-zA-Z1-9]+[.]{1}[a-zA-Z1-9]+/;
+
+
+    btnEnvoi.addEventListener('click', validation);
+
+    function validation(event) {
+
+        if (regexNomPrenom.test(prenom.value) == false) {
+            event.preventDefault();
+            paragErreur1.setAttribute('class', 'bloc__form--font--erreur');
+            paragErreur1.innerHTML = 'Format du PRENOM non  correctement!!!';
+
+        } else if (regexNomPrenom.test(nom.value) == false) {
+            event.preventDefault();
+            paragErreur2.setAttribute('class', 'bloc__form--font--erreur');
+            paragErreur2.innerHTML = 'Format du NOM non correcteFormat!!!'
+            non
+        } else if (regexAdresse.test(adresse.value) == false) {
+            event.preventDefault();
+            paragErreur3.setAttribute('class', 'bloc__form--font--erreur');
+            paragErreur3.innerHTML = 'Format de l\'ADRESSE non correctement!!!';
+
+        } else if (regexVille.test(ville.value) == false) {
+            event.preventDefault();
+            paragErreur4.setAttribute('class', 'bloc__form--font--erreur');
+            paragErreur4.innerHTML = 'Format de la VILLE non correctement!!!';
+
+        } else if (regexEmail.test(email.value) == false) {
+            event.preventDefault();
+            paragErreur5.setAttribute('class', 'bloc__form--font--erreur');
+            paragErreur5.innerHTML = 'Format de l\'E-MAIL non correctement!!!';
+        };
+    };
+};
+
+validerForms();

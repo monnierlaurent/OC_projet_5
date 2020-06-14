@@ -62,7 +62,7 @@ pageProduit = () => {
             const lienPanier = document.getElementById('lienPanier');
             lienPanier.addEventListener('click', (event) => {
 
-                keyObjt = localStorage.length;
+                let keyObjt = localStorage.length;
 
                 const order = {
                     key: keyObjt,
@@ -75,6 +75,7 @@ pageProduit = () => {
                 localStorage.setItem(keyObjt, newObjJson);
                 console.log(newObjJson);
                 window.location = 'orinoco_panier.html';
+
 
             }); //fin funtion 'click'
 
