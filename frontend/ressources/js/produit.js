@@ -1,7 +1,7 @@
 pageProduit = () => {
 
     const urlProduct = 'http://localhost:3000/api/teddies/' + (new URL(window.location.href)).searchParams.get('id');
-
+    console.log(urlProduct);
     createProduct = () => {
 
         const datas = request(urlProduct);
@@ -10,6 +10,7 @@ pageProduit = () => {
             document.querySelector('title').innerHTML = 'Orinoco/Teddies/' + products.name;
 
             const header = document.getElementById("name_produit");
+
             const newH2 = document.createElement('h2');
             newH2.setAttribute('id', 'titre');
             newH2.setAttribute('class', 'bloc__section__header--font');
@@ -17,6 +18,7 @@ pageProduit = () => {
             header.appendChild(newH2);
 
             const imageproduct = document.getElementById("image_produit");
+
             const newImg = document.createElement('img');
             newImg.setAttribute('class', 'bloc__section_2__img--seize');
             newImg.setAttribute('src', products.imageUrl);
@@ -32,6 +34,7 @@ pageProduit = () => {
             });
 
             const selectColor = document.getElementById('select_color');
+
             const newLabel = document.createElement('label');
             newLabel.setAttribute('class', 'bloc__section_2__label--font');
             newLabel.setAttribute('for', ' ');
@@ -63,6 +66,8 @@ pageProduit = () => {
             lienPanier.addEventListener('click', (event) => {
 
                 let keyObjt = localStorage.length;
+
+
 
                 const order = {
                     key: keyObjt,

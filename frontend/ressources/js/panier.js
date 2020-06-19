@@ -6,242 +6,130 @@ checkPanier = () => {
         createPanier()
     };
 };
-
 createPanier = () => {
 
-    const tablePanier = [];
-    const storage = localStorage.length;
+        const tablePanier = [];
+        const storage = localStorage.length;
 
-    for (let i = 0; i < storage; i++) {
-        const objJSON = localStorage.getItem(localStorage.key(i));
-        const objJsonParse = JSON.parse(objJSON);
-        tablePanier.push(objJsonParse);
-    };
+        for (let i = 0; i < storage; i++) {
+            const objJSON = localStorage.getItem(localStorage.key(i));
+            const objJsonParse = JSON.parse(objJSON);
+            tablePanier.push(objJsonParse);
+        };
 
-    //total panier
-    let result = 0;
+        totalpanier = () => {
+            let result = 0;
+            tablePanier.forEach(total => {
+                result += total.price / 100;
+            });
+            return result.toLocaleString('fr-FR', {
+                style: 'currency',
+                currency: 'EUR'
+            });
+        };
 
-    tablePanier.reverse().forEach(total => {
-        result += total.price / 100;
-    });
+        tablePanier.forEach(panier => {
 
-    tablePanier.forEach(panier => {
+            prices = () => {
+                let priceFinal = panier.price / 100;
+                return priceFinal.toLocaleString('fr-FR', {
+                    style: 'currency',
+                    currency: 'EUR'
+                });
+            };
 
-        const tableauProduit = document.getElementById('panier_produit');
+            const tableauProduit = document.getElementById('panier_produit');
 
-        const newTr = document.createElement('tr');
-        newTr.setAttribute('id', 'bloc-tr');
-        tableauProduit.appendChild(newTr);
+            const newTr = document.createElement('tr');
+            newTr.setAttribute('id', 'bloc-tr');
+            tableauProduit.appendChild(newTr);
 
-        const newTd0 = document.createElement('td');
-        newTr.appendChild(newTd0);
-        newTd0.innerHTML = panier.key;
+            const newTd0 = document.createElement('td');
+            newTr.appendChild(newTd0);
+            newTd0.innerHTML = panier.key;
 
-        const newTd1 = document.createElement('td');
-        newTd1.setAttribute('class', 'bloc__table--align');
-        newTr.appendChild(newTd1);
-        newTd1.innerHTML = panier.name;
 
-        const newTd2 = document.createElement('td');
-        newTd2.setAttribute('class', 'bloc__table--align');
-        newTr.appendChild(newTd2);
-        newTd2.innerHTML = '1';
+            newTr.appendChild(createElm1('td', panier.name, 'class', 'bloc__table--align'));
+            newTr.appendChild(createElm1('td', '1', 'class', 'bloc__table--align'));
+            newTr.appendChild(createElm1('td', prices(), 'class', 'bloc__table--align'));
+            newTr.appendChild(createElm1('td', prices(), 'class', 'bloc__table--align'));
+            newTr.appendChild(createElm1('button', 'supprimer', 'class', 'bloc__table__button--style btnDeleteO'));
 
-        const newTd3 = document.createElement('td');
-        newTd3.setAttribute('class', 'bloc__table--align');
-        newTr.appendChild(newTd3);
-        newTd3.innerHTML = (panier.price / 100).toLocaleString('fr-FR', {
-            style: 'currency',
-            currency: 'EUR'
-        });
+            //-----suppression produit------
 
-        const newTd4 = document.createElement('td');
-        newTd4.setAttribute('class', 'bloc__table--align');
-        newTr.appendChild(newTd4);
-        newTd4.innerHTML = (panier.price / 100).toLocaleString('fr-FR', {
-            style: 'currency',
-            currency: 'EUR'
-        });
+            newTr.addEventListener('click', alertDelete => {
+                alert(panier.key);
+                localStorage.removeItem(panier.key);
 
-        const newTd5 = document.createElement('td');
-        newTd5.setAttribute('class', 'bloc__table--align');
-        newTr.appendChild(newTd5);
+                location.reload(), false;
 
-        const newButton = document.createElement('button');
-        newButton.setAttribute('class', 'btnDeleteO');
-        newButton.setAttribute('class', 'bloc__table__button--style');
-        newButton.innerHTML = 'supprimer'
-        newTd5.appendChild(newButton);
+            });
+        }); //fin forEach
 
-        //-----suppression produit------
+        const totalProduit = document.getElementById('total_panier');
 
-        newTd5.addEventListener('click', alertDelete => {
-            alert(panier.key);
-            localStorage.removeItem(panier.key);
-            tablePanier.sort();
+        const newTrTotal = document.createElement('tr');
+        totalProduit.appendChild(newTrTotal);
+
+        // prix total du panier
+        newTrTotal.appendChild(createElm1('td', totalpanier(), 'id', 'totalCommande'));
+
+        newTrTotal.appendChild(createElm2('button', 'tous supprimer', 'class', 'bloc__table__button--style', 'id', 'deleteTotalPanier'));
+
+        document.getElementById('deleteTotalPanier').addEventListener('click', deleteTotalPanier => {
+            localStorage.clear();
             location.reload(), false;
-
         });
-    }); //fin forEach
 
-    // boutton de suppression total du panier
-    const totalProduit = document.getElementById('total_panier');
-    const newTrTotal = document.createElement('tr');
-    totalProduit.appendChild(newTrTotal);
+        // formulaire pour commande
+        const formClient = document.getElementById('formulaire');
 
-    const newTdTotal = document.createElement('td');
-    newTdTotal.setAttribute('id', 'totalCommande');
-    newTrTotal.appendChild(newTdTotal);
-    newTdTotal.innerHTML = result.toLocaleString('fr-FR', {
-        style: 'currency',
-        currency: 'EUR'
-    });
+        const newdiv1 = document.createElement('div');
+        newdiv1.setAttribute('class', 'bloc__form--flex2');
+        formClient.appendChild(newdiv1);
 
-    const deleteButton = document.createElement('button');
-    deleteButton.setAttribute('class', 'bloc__table__button--style');
-    deleteButton.setAttribute('id', 'deleteTotalPanier');
-    newTrTotal.appendChild(deleteButton);
-    deleteButton.innerHTML = 'supprimer'
+        newdiv1.appendChild(createElm2('label', 'Prenom :', 'class', 'bloc__form__label--font', 'for', 'prenom'));
+        newdiv1.appendChild(createElm2('label', 'Nom :', 'class', 'bloc__form__label--font1', 'for', 'nom'));
+        newdiv1.appendChild(createElm2('label', 'Adresse :', 'class', 'bloc__form__label--font1', 'for', 'adresse'));
+        newdiv1.appendChild(createElm2('label', 'Ville :', 'class', 'bloc__form__label--font1', 'for', 'ville'));
+        newdiv1.appendChild(createElm2('label', 'Adresse électronique :', 'class', 'bloc__form__label--font1', 'for', 'email'));
 
-    deleteButton.addEventListener('click', deleteTotalPanier => {
-        localStorage.clear();
-        location.reload(), false;
-    });
+        const newdiv2 = document.createElement('div');
 
-    // formulaire pour commande
-    const formClient = document.getElementById('formulaire');
+        newdiv2.setAttribute('class', 'bloc__form--flex2 bloc__form--padding');
+        formClient.appendChild(newdiv2);
 
-    const newdiv1 = document.createElement('div');
-    newdiv1.setAttribute('class', 'bloc__form--flex2');
-    formClient.appendChild(newdiv1);
+        newdiv2.appendChild(createElm1('p', '* champ obligatoire', 'id', 'erreur1'));
+        newdiv2.appendChild(createinputs('input', 'id', 'prenom', 'name', 'prenom', 'class', 'bloc__form__input--border', 'type', 'text', 'value', ''));
 
-    const newLabel1 = document.createElement('label');
-    newLabel1.setAttribute('class', 'bloc__form__label--font');
-    newLabel1.setAttribute('for', 'prenom');
-    newLabel1.innerHTML = 'Prenom :';
-    newdiv1.appendChild(newLabel1);
-
-    const newLabel2 = document.createElement('label');
-    newLabel2.setAttribute('class', 'bloc__form__label--font1');
-    newLabel2.setAttribute('for', 'nom');
-    newLabel2.innerHTML = 'Nom :';
-    newdiv1.appendChild(newLabel2);
-
-    const newLabel3 = document.createElement('label');
-    newLabel3.setAttribute('class', 'bloc__form__label--font1');
-    newLabel3.setAttribute('for', 'adresse');
-    newLabel3.innerHTML = 'Adresse :';
-    newdiv1.appendChild(newLabel3);
-
-    const newLabel4 = document.createElement('label');
-    newLabel4.setAttribute('class', 'bloc__form__label--font1');
-    newLabel4.setAttribute('for', 'ville');
-    newLabel4.innerHTML = 'Ville :';
-    newdiv1.appendChild(newLabel4);
+        newdiv2.appendChild(createElm1('p', '* champ obligatoire', 'id', 'erreur2'));
+        newdiv2.appendChild(createinputs('input', 'id', 'nom', 'name', 'nom', 'class', 'bloc__form__input--border', 'type', 'text', 'value', ''));
 
 
+        newdiv2.appendChild(createElm1('p', '* champ obligatoire', 'id', 'erreur3'));
+        newdiv2.appendChild(createinputs('input', 'id', 'adresse', 'name', 'adresse', 'class', 'bloc__form__input--border', 'type', 'text', 'value', ''));
 
-    const newLabel5 = document.createElement('label');
-    newLabel5.setAttribute('class', 'bloc__form__label--font1');
-    newLabel5.setAttribute('for', 'email');
-    newLabel5.innerHTML = 'Adresse électronique :';
-    newdiv1.appendChild(newLabel5);
+        newdiv2.appendChild(createElm1('p', '* champ obligatoire', 'id', 'erreur4'));
+        newdiv2.appendChild(createinputs('input', 'id', 'ville', 'name', 'ville', 'class', 'bloc__form__input--border', 'type', 'text', 'value', ''));
 
-    const newdiv2 = document.createElement('div');
-    newdiv2.setAttribute('class', 'bloc__form--flex2 bloc__form--padding');
-    formClient.appendChild(newdiv2);
+        newdiv2.appendChild(createElm1('p', '* champ obligatoire', 'id', 'erreur5'));
+        newdiv2.appendChild(createinputs('input', 'id', 'email', 'name', 'email', 'class', 'bloc__form__input--border', 'type', 'email', 'value', ''));
 
-    const newPargErreur1 = document.createElement('p');
-    newPargErreur1.setAttribute('id', 'erreur1');
-    newPargErreur1.innerText = '* champ obligatoire';
-    newdiv2.appendChild(newPargErreur1);
+        const newbtn2 = document.createElement('button');
+        newbtn2.setAttribute('id', 'envoyer_commande');
+        newbtn2.setAttribute('class', 'bloc__section_4__button--style');
+        newbtn2.setAttribute('type', 'submit');
+        newbtn2.innerHTML = 'Commander';
+        newdiv2.appendChild(newbtn2);
 
-    const newInput1 = document.createElement('input');
-    newInput1.setAttribute('id', 'prenom');
-    newInput1.setAttribute('name', 'prenom');
-    newInput1.setAttribute('class', 'bloc__form__input--border');
-    newInput1.setAttribute('type', 'text');
-    newInput1.setAttribute('value', '');
-    newdiv2.appendChild(newInput1);
-
-    const newPargErreur2 = document.createElement('p');
-    newPargErreur2.setAttribute('id', 'erreur2');
-    newPargErreur2.innerText = '* champ obligatoire';
-    newdiv2.appendChild(newPargErreur2);
-
-    const newInput2 = document.createElement('input');
-    newInput2.setAttribute('id', 'nom');
-    newInput2.setAttribute('name', 'nom');
-    newInput2.setAttribute('class', 'bloc__form__input--border');
-    newInput2.setAttribute('type', 'text');
-    newInput2.setAttribute('value', '');
-    newdiv2.appendChild(newInput2);
-
-    const newPargErreur3 = document.createElement('p');
-    newPargErreur3.setAttribute('id', 'erreur3');
-    newPargErreur3.innerText = '* champ obligatoire';
-    newdiv2.appendChild(newPargErreur3);
-
-    const newInput3 = document.createElement('input');
-    newInput3.setAttribute('id', 'adresse');
-    newInput3.setAttribute('name', 'adresse');
-    newInput3.setAttribute('class', 'bloc__form__input--border');
-    newInput3.setAttribute('type', 'text');
-    newInput3.setAttribute('value', '');
-    newdiv2.appendChild(newInput3);
-
-    const newPargErreur4 = document.createElement('p');
-    newPargErreur4.setAttribute('id', 'erreur4');
-    newPargErreur4.innerText = '* champ obligatoire';
-    newdiv2.appendChild(newPargErreur4);
-
-    const newInput4 = document.createElement('input');
-    newInput4.setAttribute('id', 'ville');
-    newInput4.setAttribute('name', 'ville');
-    newInput4.setAttribute('class', 'bloc__form__input--border');
-    newInput4.setAttribute('type', 'text');
-    newInput4.setAttribute('value', '');
-    newdiv2.appendChild(newInput4);
-
-    const newPargErreur5 = document.createElement('p');
-    newPargErreur5.setAttribute('id', 'erreur5');
-    newPargErreur5.innerText = '* champ obligatoire';
-    newdiv2.appendChild(newPargErreur5);
-
-    const newInput5 = document.createElement('input');
-    newInput5.setAttribute('id', 'email');
-    newInput5.setAttribute('name', 'email');
-    newInput5.setAttribute('class', 'bloc__form__input--border');
-    newInput5.setAttribute('type', 'email');
-    newInput5.setAttribute('value', '');
-    newdiv2.appendChild(newInput5);
-
-    const newbtn2 = document.createElement('button');
-    newbtn2.setAttribute('id', 'envoyer_commande');
-    newbtn2.setAttribute('class', 'bloc__section_4__button--style');
-    newbtn2.setAttribute('type', 'submit');
-    newbtn2.innerHTML = 'Commander';
-    newdiv2.appendChild(newbtn2);
-
-}; //fin de create panier
+    } //fin de create panier
 
 checkPanier();
 
 // button commander + objet contact
-createContact = () => {
-    /*const contact = {
-        prenon: inputPrenon,
-        nom: inputNom,
-        adresse: inputAdresse,
-        ville: inputVille,
-        email: inputEmail
-    };
-    console.log(contact);
-*/
-};
-
-
 validerForms = () => {
+
+    const products = [];
 
     const btnEnvoi = document.getElementById('envoyer_commande');
     const prenom = document.getElementById('prenom');
@@ -266,32 +154,62 @@ validerForms = () => {
 
     function validation(event) {
 
+        event.preventDefault();
         if (regexNomPrenom.test(prenom.value) == false) {
-            event.preventDefault();
             paragErreur1.setAttribute('class', 'bloc__form--font--erreur');
-            paragErreur1.innerHTML = 'Format du PRENOM non  correctement!!!';
+            paragErreur1.innerHTML = 'Format du PRENOM non  conforme !!!';
 
-        } else if (regexNomPrenom.test(nom.value) == false) {
-            event.preventDefault();
-            paragErreur2.setAttribute('class', 'bloc__form--font--erreur');
-            paragErreur2.innerHTML = 'Format du NOM non correcteFormat!!!'
-            non
-        } else if (regexAdresse.test(adresse.value) == false) {
-            event.preventDefault();
-            paragErreur3.setAttribute('class', 'bloc__form--font--erreur');
-            paragErreur3.innerHTML = 'Format de l\'ADRESSE non correctement!!!';
-
-        } else if (regexVille.test(ville.value) == false) {
-            event.preventDefault();
-            paragErreur4.setAttribute('class', 'bloc__form--font--erreur');
-            paragErreur4.innerHTML = 'Format de la VILLE non correctement!!!';
-
-        } else if (regexEmail.test(email.value) == false) {
-            event.preventDefault();
-            paragErreur5.setAttribute('class', 'bloc__form--font--erreur');
-            paragErreur5.innerHTML = 'Format de l\'E-MAIL non correctement!!!';
+        } else {
+            paragErreur1.setAttribute('class', 'bloc__form--font--erreur2');
+            paragErreur1.innerHTML = 'correcte';
         };
+
+        if (regexNomPrenom.test(nom.value) == false) {
+            paragErreur2.setAttribute('class', 'bloc__form--font--erreur');
+            paragErreur2.innerHTML = 'Format du NOM non coronforme !!!'
+        } else {
+            paragErreur2.setAttribute('class', 'bloc__form--font--erreur2');
+            paragErreur2.innerHTML = 'correcte';
+        };
+
+        if (regexAdresse.test(adresse.value) == false) {
+            paragErreur3.setAttribute('class', 'bloc__form--font--erreur');
+            paragErreur3.innerHTML = 'Format de l\'ADRESSE non conforme !!!';
+        } else {
+            paragErreur3.setAttribute('class', 'bloc__form--font--erreur2');
+            paragErreur3.innerHTML = 'correcte';
+        };
+        if (regexVille.test(ville.value) == false) {
+            paragErreur4.setAttribute('class', 'bloc__form--font--erreur');
+            paragErreur4.innerHTML = 'Format de la VILLE non conforme !!!';
+        } else {
+            paragErreur4.setAttribute('class', 'bloc__form--font--erreur2');
+            paragErreur4.innerHTML = 'correcte';
+        };
+
+        if (regexEmail.test(email.value) == false) {
+            paragErreur5.setAttribute('class', 'bloc__form--font--erreur');
+            paragErreur5.innerHTML = 'Format de l\'E-MAIL non conforme !!!';
+        } else {
+            paragErreur5.setAttribute('class', 'bloc__form--font--erreur2');
+            paragErreur5.innerHTML = 'correcte';
+        };
+
+        const contact = {
+            firstName: prenom.value,
+            lastName: nom.value,
+            address: adresse.value,
+            city: ville.value,
+            email: email.value,
+        };
+
+        products.push(localStorage.getItem(localStorage.key(i)));
+
+        const order = { contact, products };
+        console.log(order);
+        send(order);
     };
 };
+
 
 validerForms();

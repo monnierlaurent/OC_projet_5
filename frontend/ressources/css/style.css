@@ -373,3 +373,7 @@
     .bloc__form--font--erreur {
         color: red;
     }
+    
+    .bloc__form--font--erreur2 {
+        color: green;
+    }
