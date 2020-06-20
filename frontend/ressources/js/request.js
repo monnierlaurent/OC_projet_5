@@ -12,5 +12,3 @@ async function send(data) {
     }); //fin fetch
     let responseData = await response.json();
 };
-
-// function de creation d'element
