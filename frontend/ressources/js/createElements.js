@@ -1,16 +1,24 @@
 createElm1 = (balise, value, attribut, attributValue) => {
-    const newElm = document.createElement(balise);
-    newElm.setAttribute(attribut, attributValue);
-    newElm.innerHTML = value;
-    return newElm;
+    const newElm1 = document.createElement(balise);
+    newElm1.setAttribute(attribut, attributValue);
+    newElm1.innerHTML = value;
+    return newElm1;
 };
 
 createElm2 = (balise, value, attribut1, attributValue1, attribut2, attributValue2) => {
-    const newLabel = document.createElement(balise);
-    newLabel.setAttribute(attribut1, attributValue1);
-    newLabel.setAttribute(attribut2, attributValue2);
-    newLabel.innerHTML = value;
-    return newLabel;
+    const newElm2 = document.createElement(balise);
+    newElm2.setAttribute(attribut1, attributValue1);
+    newElm2.setAttribute(attribut2, attributValue2);
+    newElm2.innerHTML = value;
+    return newElm2;
+};
+createElm3 = (balise, value, attribut1, attributValue1, attribut2, attributValue2, attribut3, attributValue3) => {
+    const newElm3 = document.createElement(balise);
+    newElm3.setAttribute(attribut1, attributValue1);
+    newElm3.setAttribute(attribut2, attributValue2);
+    newElm3.setAttribute(attribut3, attributValue3);
+    newElm3.innerHTML = value;
+    return newElm3;
 };
 
 createinputs = (balise, atb1, atbVal1, atb2, atbVal2, atb3, atbVal3, atb4, atbVal4, atb5, atbVal5) => {
@@ -21,4 +29,14 @@ createinputs = (balise, atb1, atbVal1, atb2, atbVal2, atb3, atbVal3, atb4, atbVa
     newInput.setAttribute(atb4, atbVal4);
     newInput.setAttribute(atb5, atbVal5);
     return newInput;
+};
+
+// prix produit
+
+pricesProduct = (value) => {
+    let priceFinal = value.price / 100;
+    return priceFinal.toLocaleString('fr-FR', {
+        style: 'currency',
+        currency: 'EUR'
+    });
 };

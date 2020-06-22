@@ -1,7 +1,7 @@
 pageProduit = () => {
 
     const urlProduct = 'http://localhost:3000/api/teddies/' + (new URL(window.location.href)).searchParams.get('id');
-    console.log(urlProduct);
+
     createProduct = () => {
 
         const datas = request(urlProduct);
@@ -11,77 +11,58 @@ pageProduit = () => {
 
             const header = document.getElementById("name_produit");
 
-            const newH2 = document.createElement('h2');
-            newH2.setAttribute('id', 'titre');
-            newH2.setAttribute('class', 'bloc__section__header--font');
-            newH2.innerText = products.name;
-            header.appendChild(newH2);
+            header.appendChild(createElm2('h2', products.name, 'id', 'titre', 'class', 'bloc__section__header--font'));
 
             const imageproduct = document.getElementById("image_produit");
 
-            const newImg = document.createElement('img');
-            newImg.setAttribute('class', 'bloc__section_2__img--seize');
-            newImg.setAttribute('src', products.imageUrl);
-            newImg.setAttribute('alt', 'photo de l\'ourson');
-            imageproduct.appendChild(newImg);
+            imageproduct.appendChild(createElm3('img', '', 'class', 'bloc__section_2__img--seize', 'src', products.imageUrl, 'alt', 'photo de l\'ourson'));
 
             document.getElementById("description_produit").innerHTML = products.description;
 
-
-            document.getElementById("prix-produit").innerHTML = '<br>prix :' + ' ' + (products.price / 100).toLocaleString('fr-FR', {
-                style: "currency",
-                currency: "EUR"
-            });
+            document.getElementById("prix-produit").innerHTML = '<br>prix :' + ' ' + pricesProduct(products);
 
             const selectColor = document.getElementById('select_color');
 
-            const newLabel = document.createElement('label');
-            newLabel.setAttribute('class', 'bloc__section_2__label--font');
-            newLabel.setAttribute('for', ' ');
-            newLabel.innerText = 'Selectionnez une couleur :';
-            selectColor.appendChild(newLabel);
+            const newLabel = selectColor.appendChild(createElm2('label', 'Selectionnez une couleur :', 'class', 'bloc__section_2__label--font', 'for', ' '));
 
-
-            const newSelect = document.createElement('select');
-            newSelect.setAttribute('class', 'bloc__section_2__select--font');
-            newLabel.appendChild(newSelect);
+            const newSelect = newLabel.appendChild(createElm1('select', '', 'class', 'bloc__section_2__select--font'));
 
             products.colors.forEach((color) => {
-                const newOption = document.createElement('option');
-                newOption.setAttribute('class', 'bloc__section_2__option--font');
-                newOption.setAttribute('value', '');
-                newOption.innerHTML = color;
-                newSelect.appendChild(newOption);
+                newSelect.appendChild(createElm2('option', color, 'class', 'bloc__section_2__option--font', 'value', ''));
             });
 
             const divbutton = document.getElementById("panier_ajout");
-            const newbutton = document.createElement('div');
-            newbutton.setAttribute('id', 'lienPanier');
-            newbutton.setAttribute('class', 'bloc__section_2__button--style');
-            newbutton.innerHTML = 'Ajoutez au panier';
-            divbutton.appendChild(newbutton);
+            divbutton.appendChild(createElm2('div', 'Ajoutez au panier', 'id', 'lienPanier', 'class', 'bloc__section_2__button--style'));
 
             //---------------------------
-            const lienPanier = document.getElementById('lienPanier');
-            lienPanier.addEventListener('click', (event) => {
+            document.getElementById('lienPanier').addEventListener('click', (event) => {
+                // console.log(localStorage.length);
+                console.log(localStorage);
+                let keyObj = localStorage.length;
 
-                let keyObjt = localStorage.length;
+                /*let keyObj;
 
+                for (let i = 0; i < localStorage.length; i++) {
+                    keyObj = i;
+                };
 
+                console.log(keyObj);*/
 
-                const order = {
-                    key: keyObjt,
+                const order1 = {
+                    key: keyObj,
                     id: products._id,
                     name: products.name,
                     price: products.price
                 };
 
-                const newObjJson = JSON.stringify(order);
-                localStorage.setItem(keyObjt, newObjJson);
-                console.log(newObjJson);
+                //console.log(order1);
+
+                const newObjJson = JSON.stringify(order1);
+                localStorage.setItem(keyObj, newObjJson);
+
+                //console.log(localStorage.key(newObjJson));
+
                 window.location = 'orinoco_panier.html';
-
-
             }); //fin funtion 'click'
 
         }).catch((error => {
@@ -93,19 +74,12 @@ pageProduit = () => {
             const parent = document.getElementById('section_container');
             parent.removeChild(div1);
 
-
-            const div2 = document.createElement('div');
-            div2.setAttribute('class', 'bloc__heading_erreur bloc__heading_erreur--detail');
-            section1.appendChild(div2);
-
-            const newh3 = document.createElement('h3');
-            newh3.setAttribute('class', 'bloc__section__header--font');
-            newh3.innerText = 'probleme d\'affichage du produit';
-            div2.appendChild(newh3);
+            const div2 = section1.appendChild(createElm1('div', '', 'class', 'bloc__heading_erreur bloc__heading_erreur--detail'));
+            div2.appendChild(createElm1('h3', 'probleme d\'affichage du produit', 'class', 'bloc__section__header--font'));
         })); // fin cath
     }; //fin de function createProduct
     // } // fin de if
     createProduct()
-};
 
+};
 pageProduit();

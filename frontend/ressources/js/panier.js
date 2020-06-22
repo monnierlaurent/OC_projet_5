@@ -14,9 +14,9 @@ createPanier = () => {
         for (let i = 0; i < storage; i++) {
             const objJSON = localStorage.getItem(localStorage.key(i));
             const objJsonParse = JSON.parse(objJSON);
+
             tablePanier.push(objJsonParse);
         };
-
         totalpanier = () => {
             let result = 0;
             tablePanier.forEach(total => {
@@ -30,39 +30,26 @@ createPanier = () => {
 
         tablePanier.forEach(panier => {
 
-            prices = () => {
-                let priceFinal = panier.price / 100;
-                return priceFinal.toLocaleString('fr-FR', {
-                    style: 'currency',
-                    currency: 'EUR'
-                });
-            };
-
             const tableauProduit = document.getElementById('panier_produit');
 
-            const newTr = document.createElement('tr');
-            newTr.setAttribute('id', 'bloc-tr');
-            tableauProduit.appendChild(newTr);
+            const newTr = tableauProduit.appendChild(createElm1('tr', '', 'id', 'bloc-tr'));
 
-            const newTd0 = document.createElement('td');
-            newTr.appendChild(newTd0);
-            newTd0.innerHTML = panier.key;
-
+            // key provisoir a supprimer quand suppression produit fini
+            newTr.appendChild(createElm1('td', panier.key, 'class', ''));
+            //fin
 
             newTr.appendChild(createElm1('td', panier.name, 'class', 'bloc__table--align'));
             newTr.appendChild(createElm1('td', '1', 'class', 'bloc__table--align'));
-            newTr.appendChild(createElm1('td', prices(), 'class', 'bloc__table--align'));
-            newTr.appendChild(createElm1('td', prices(), 'class', 'bloc__table--align'));
-            newTr.appendChild(createElm1('button', 'supprimer', 'class', 'bloc__table__button--style btnDeleteO'));
+            newTr.appendChild(createElm1('td', pricesProduct(panier), 'class', 'bloc__table--align'));
+            newTr.appendChild(createElm1('td', pricesProduct(panier), 'class', 'bloc__table--align'));
+            newTr.appendChild(createElm1('td', '', 'class', 'bloc__table--align'));
+            newTr.appendChild(createElm1('button', 'Supprimer', 'class', 'bloc__table__button--style btnDeleteO'));
 
             //-----suppression produit------
-
-            newTr.addEventListener('click', alertDelete => {
+            newTr.addEventListener('click', function(i) {
                 alert(panier.key);
                 localStorage.removeItem(panier.key);
-
                 location.reload(), false;
-
             });
         }); //fin forEach
 
@@ -84,9 +71,7 @@ createPanier = () => {
         // formulaire pour commande
         const formClient = document.getElementById('formulaire');
 
-        const newdiv1 = document.createElement('div');
-        newdiv1.setAttribute('class', 'bloc__form--flex2');
-        formClient.appendChild(newdiv1);
+        const newdiv1 = formClient.appendChild(createElm1('div', '', 'class', 'bloc__form--flex2'));
 
         newdiv1.appendChild(createElm2('label', 'Prenom :', 'class', 'bloc__form__label--font', 'for', 'prenom'));
         newdiv1.appendChild(createElm2('label', 'Nom :', 'class', 'bloc__form__label--font1', 'for', 'nom'));
@@ -94,17 +79,14 @@ createPanier = () => {
         newdiv1.appendChild(createElm2('label', 'Ville :', 'class', 'bloc__form__label--font1', 'for', 'ville'));
         newdiv1.appendChild(createElm2('label', 'Adresse électronique :', 'class', 'bloc__form__label--font1', 'for', 'email'));
 
-        const newdiv2 = document.createElement('div');
 
-        newdiv2.setAttribute('class', 'bloc__form--flex2 bloc__form--padding');
-        formClient.appendChild(newdiv2);
+        const newdiv2 = formClient.appendChild(createElm1('div', '', 'class', 'bloc__form--flex2 bloc__form--padding'));
 
         newdiv2.appendChild(createElm1('p', '* champ obligatoire', 'id', 'erreur1'));
         newdiv2.appendChild(createinputs('input', 'id', 'prenom', 'name', 'prenom', 'class', 'bloc__form__input--border', 'type', 'text', 'value', ''));
 
         newdiv2.appendChild(createElm1('p', '* champ obligatoire', 'id', 'erreur2'));
         newdiv2.appendChild(createinputs('input', 'id', 'nom', 'name', 'nom', 'class', 'bloc__form__input--border', 'type', 'text', 'value', ''));
-
 
         newdiv2.appendChild(createElm1('p', '* champ obligatoire', 'id', 'erreur3'));
         newdiv2.appendChild(createinputs('input', 'id', 'adresse', 'name', 'adresse', 'class', 'bloc__form__input--border', 'type', 'text', 'value', ''));
@@ -115,12 +97,7 @@ createPanier = () => {
         newdiv2.appendChild(createElm1('p', '* champ obligatoire', 'id', 'erreur5'));
         newdiv2.appendChild(createinputs('input', 'id', 'email', 'name', 'email', 'class', 'bloc__form__input--border', 'type', 'email', 'value', ''));
 
-        const newbtn2 = document.createElement('button');
-        newbtn2.setAttribute('id', 'envoyer_commande');
-        newbtn2.setAttribute('class', 'bloc__section_4__button--style');
-        newbtn2.setAttribute('type', 'submit');
-        newbtn2.innerHTML = 'Commander';
-        newdiv2.appendChild(newbtn2);
+        newdiv2.appendChild(createElm3('button', 'Commander', 'id', 'envoyer_commande', 'class', 'bloc__section_4__button--style', 'type', 'submit'));
 
     } //fin de create panier
 
@@ -144,9 +121,9 @@ validerForms = () => {
     const paragErreur4 = document.getElementById('erreur4');
     const paragErreur5 = document.getElementById('erreur5');
 
-    const regexNomPrenom = /^[a-zA-Z\-]+/;
-    const regexAdresse = /^[a-zA-Z0-9\-\,\:]+/;
-    const regexVille = /^[a-zA-Z\-]+/;
+    const regexNomPrenom = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\-]+/;
+    const regexAdresse = /^[a-zA-Z0-9a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\-\,\:]+/;
+    const regexVille = /^[a-zA-Za-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\-]+/;
     const regexEmail = /^[a-zA-Z1-9\-]+?@{1}[a-zA-Z1-9]+[.]{1}[a-zA-Z1-9]+/;
 
 
@@ -155,44 +132,44 @@ validerForms = () => {
     function validation(event) {
 
         event.preventDefault();
-        if (regexNomPrenom.test(prenom.value) == false) {
+
+        if (regexNomPrenom.test(prenom.value) == true) {
+            paragErreur1.setAttribute('class', 'bloc__form--font--erreur2');
+            paragErreur1.innerHTML = '* champ obligatoire';
+        } else if (regexNomPrenom.test(prenom.value) == false) {
             paragErreur1.setAttribute('class', 'bloc__form--font--erreur');
             paragErreur1.innerHTML = 'Format du PRENOM non  conforme !!!';
-
-        } else {
-            paragErreur1.setAttribute('class', 'bloc__form--font--erreur2');
-            paragErreur1.innerHTML = 'correcte';
         };
 
-        if (regexNomPrenom.test(nom.value) == false) {
-            paragErreur2.setAttribute('class', 'bloc__form--font--erreur');
-            paragErreur2.innerHTML = 'Format du NOM non coronforme !!!'
-        } else {
+        if (regexNomPrenom.test(nom.value) == true) {
             paragErreur2.setAttribute('class', 'bloc__form--font--erreur2');
-            paragErreur2.innerHTML = 'correcte';
+            paragErreur2.innerHTML = '* champ obligatoire';
+        } else if (regexNomPrenom.test(nom.value) == false) {
+            paragErreur2.setAttribute('class', 'bloc__form--font--erreur');
+            paragErreur2.innerHTML = 'Format du NOM non conforme !!!';
         };
 
-        if (regexAdresse.test(adresse.value) == false) {
+        if (regexAdresse.test(adresse.value) == true) {
+            paragErreur3.setAttribute('class', 'bloc__form--font--erreur2');
+            paragErreur3.innerHTML = '* champ obligatoire';
+        } else if (regexAdresse.test(adresse.value) == false) {
             paragErreur3.setAttribute('class', 'bloc__form--font--erreur');
             paragErreur3.innerHTML = 'Format de l\'ADRESSE non conforme !!!';
-        } else {
-            paragErreur3.setAttribute('class', 'bloc__form--font--erreur2');
-            paragErreur3.innerHTML = 'correcte';
         };
-        if (regexVille.test(ville.value) == false) {
+        if (regexVille.test(ville.value) == true) {
+            paragErreur4.setAttribute('class', 'bloc__form--font--erreur2');
+            paragErreur4.innerHTML = '* champ obligatoire';
+        } else if (regexVille.test(ville.value) == false) {
             paragErreur4.setAttribute('class', 'bloc__form--font--erreur');
             paragErreur4.innerHTML = 'Format de la VILLE non conforme !!!';
-        } else {
-            paragErreur4.setAttribute('class', 'bloc__form--font--erreur2');
-            paragErreur4.innerHTML = 'correcte';
         };
 
-        if (regexEmail.test(email.value) == false) {
+        if (regexEmail.test(email.value) == true) {
+            paragErreur5.setAttribute('class', 'bloc__form--font--erreur2');
+            paragErreur5.innerHTML = 'corecte';
+        } else if (regexEmail.test(email.value) == false) {
             paragErreur5.setAttribute('class', 'bloc__form--font--erreur');
             paragErreur5.innerHTML = 'Format de l\'E-MAIL non conforme !!!';
-        } else {
-            paragErreur5.setAttribute('class', 'bloc__form--font--erreur2');
-            paragErreur5.innerHTML = 'correcte';
         };
 
         const contact = {
@@ -213,3 +190,5 @@ validerForms = () => {
 
 
 validerForms();
+
+console.log(localStorage);

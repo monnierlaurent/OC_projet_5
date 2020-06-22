@@ -13,36 +13,12 @@ createCatalog = () => {
             newArticle.setAttribute('class', 'bloc__section__article--border');
             sectionProduit.appendChild(newArticle);
 
-            const newLien = document.createElement('a');
-            newLien.setAttribute('class', 'bloc__section__article--flex lien');
-            newLien.setAttribute('id', 'lien');
-            newLien.setAttribute('href', 'orinoco_page_produit.html?id=' + product._id);
-            newArticle.appendChild(newLien);
+            const newLien = newArticle.appendChild(createElm3('a', '', 'class', 'bloc__section__article--flex lien', 'id', 'lien', 'href', 'orinoco_page_produit.html?id=' + product._id));
+            newLien.appendChild(createElm2('img', '', 'class', 'bloc__section__article--image', 'src', product.imageUrl));
+            newLien.appendChild(createElm1('h2', product.name, 'class', 'bloc__section__heading--font'));
 
-            const newImg = document.createElement('img');
-            newImg.setAttribute('class', 'bloc__section__article--image');
-            newImg.setAttribute('src', product.imageUrl);
-            newLien.appendChild(newImg);
-
-            const newName = document.createElement('h2');
-            newName.setAttribute('class', 'bloc__section__heading--font');
-            newName.innerHTML = product.name;
-            newLien.appendChild(newName);
-
-            const newParag = document.createElement('p');
-            newParag.setAttribute('class', 'bloc__section__heading--font bloc__section__flex');
-            let prices = product.price / 100;
-            newParag.innerHTML = prices.toLocaleString('fr-FR', {
-                style: "currency",
-                currency: "EUR"
-            });
-            newLien.appendChild(newParag);
-
-            const newbutton = document.createElement('div');
-            newbutton.setAttribute('class', 'bloc__section_2__button_2--style lien');
-            newbutton.setAttribute('id', ' lien2');
-            newbutton.innerHTML = 'Détail';
-            newParag.appendChild(newbutton);
+            const newParag = newLien.appendChild(createElm1('p', pricesProduct(product), 'class', 'bloc__section__heading--font bloc__section__flex'));
+            newParag.appendChild(createElm2('div', 'Détail', 'class', 'bloc__section_2__button_2--style lien', 'id', ' lien2'));
 
         }); // fin boucle
 
