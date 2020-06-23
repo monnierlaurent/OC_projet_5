@@ -36,17 +36,21 @@ pageProduit = () => {
 
             //---------------------------
             document.getElementById('lienPanier').addEventListener('click', (event) => {
-                // console.log(localStorage.length);
+
                 console.log(localStorage);
-                let keyObj = localStorage.length;
+                //let keyObj = localStorage.length;
 
-                /*let keyObj;
-
+                let keyObj;
+                const tableKey = [];
                 for (let i = 0; i < localStorage.length; i++) {
-                    keyObj = i;
+                    tableKey.push(parseInt(localStorage.key(i)));
                 };
+                keyObj = tableKey[0] + 1;
+                //console.log(tableKey);
+                //console.log(keyObj);
 
-                console.log(keyObj);*/
+
+
 
                 const order1 = {
                     key: keyObj,
