@@ -239,14 +239,17 @@
     /*-----confirmation de commande-----*/
     
     .bloc__section_3__padding {
-        padding: 3em;
+        padding: 3em 0 3em 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     
     .bloc__section_3__parag--font {
         font-size: 1.5em;
         text-align: center;
         font-family: "belligerent";
-        padding-bottom: 2em;
         line-height: 2em;
     }
     
@@ -254,6 +257,11 @@
     .bloc__button--flex {
         display: flex;
         justify-content: flex-end;
+    }
+    
+    .button--font {
+        font-size: 1.5em;
+        padding: 0.3em;
     }
     /*-----panier-----*/
     

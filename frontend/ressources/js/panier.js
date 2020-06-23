@@ -3,7 +3,7 @@ checkPanier = () => {
     if (localStorage.length === 0) {
         alert('le panier est vide'); // faire un veritable message d'erreur en html
     } else {
-        createPanier()
+        createPanier();
     };
 };
 createPanier = () => {
@@ -29,6 +29,7 @@ createPanier = () => {
         };
 
         tablePanier.forEach(panier => {
+
 
             const tableauProduit = document.getElementById('panier_produit');
 
@@ -106,7 +107,7 @@ checkPanier();
 // button commander + objet contact
 validerForms = () => {
 
-    const products = [];
+    const product_id = [];
 
     const btnEnvoi = document.getElementById('envoyer_commande');
     const prenom = document.getElementById('prenom');
@@ -129,11 +130,12 @@ validerForms = () => {
 
     btnEnvoi.addEventListener('click', validation);
 
-    function validation(event) {
+    function validation(event, i) {
 
         event.preventDefault();
 
         if (regexNomPrenom.test(prenom.value) == true) {
+            //console.log(typeof prenom.value);
             paragErreur1.setAttribute('class', 'bloc__form--font--erreur2');
             paragErreur1.innerHTML = '* champ obligatoire';
         } else if (regexNomPrenom.test(prenom.value) == false) {
@@ -142,6 +144,7 @@ validerForms = () => {
         };
 
         if (regexNomPrenom.test(nom.value) == true) {
+            //console.log(typeof nom.value);
             paragErreur2.setAttribute('class', 'bloc__form--font--erreur2');
             paragErreur2.innerHTML = '* champ obligatoire';
         } else if (regexNomPrenom.test(nom.value) == false) {
@@ -150,6 +153,7 @@ validerForms = () => {
         };
 
         if (regexAdresse.test(adresse.value) == true) {
+            //console.log(typeof adresse.value);
             paragErreur3.setAttribute('class', 'bloc__form--font--erreur2');
             paragErreur3.innerHTML = '* champ obligatoire';
         } else if (regexAdresse.test(adresse.value) == false) {
@@ -157,6 +161,7 @@ validerForms = () => {
             paragErreur3.innerHTML = 'Format de l\'ADRESSE non conforme !!!';
         };
         if (regexVille.test(ville.value) == true) {
+            //console.log(typeof ville.value);
             paragErreur4.setAttribute('class', 'bloc__form--font--erreur2');
             paragErreur4.innerHTML = '* champ obligatoire';
         } else if (regexVille.test(ville.value) == false) {
@@ -165,8 +170,9 @@ validerForms = () => {
         };
 
         if (regexEmail.test(email.value) == true) {
+            //console.log(typeof email.value);
             paragErreur5.setAttribute('class', 'bloc__form--font--erreur2');
-            paragErreur5.innerHTML = 'corecte';
+            paragErreur5.innerHTML = '* champ obligatoire';
         } else if (regexEmail.test(email.value) == false) {
             paragErreur5.setAttribute('class', 'bloc__form--font--erreur');
             paragErreur5.innerHTML = 'Format de l\'E-MAIL non conforme !!!';
@@ -177,18 +183,40 @@ validerForms = () => {
             lastName: nom.value,
             address: adresse.value,
             city: ville.value,
-            email: email.value,
+            email: email.value
         };
 
-        products.push(localStorage.getItem(localStorage.key(i)));
 
-        const order = { contact, products };
+
+        const storage2 = localStorage.length;
+
+        for (let i = 0; i < storage2; i++) {
+            const objJSON2 = localStorage.getItem(localStorage.key(i));
+            const objJsonParse2 = JSON.parse(objJSON2);
+
+            product_id.push(objJsonParse2.id);
+        };
+        const order = {
+            contact: contact,
+            products: product_id
+        };
+        const datas = send('http://localhost:3000/api/teddies/order', order);
         console.log(order);
-        send(order);
+        datas.then(rep => {
+
+            localStorage.clear();
+
+            const repstring = JSON.stringify(rep);
+            localStorage.setItem('repOrder', repstring);
+
+            window.location = 'orinoco_confirmation_commande.html';
+
+            //console.log(rep);
+            //console.log(localStorage);
+            // console.log(rep.contact.email);
+        });
+
     };
+
 };
-
-
 validerForms();
-
-console.log(localStorage);

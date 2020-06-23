@@ -4,11 +4,12 @@ async function request(url) {
     return data;
 };
 
-async function send(data) {
-    let response = await fetch('http://localhost:3000/api/teddies/order', {
+async function send(url, datas) {
+    let response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(datas)
     }); //fin fetch
-    let responseData = await response.json();
+    let data2 = await response.json();
+    return data2;
 };
