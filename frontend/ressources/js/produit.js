@@ -9,9 +9,8 @@ pageProduit = () => {
 
             document.querySelector('title').innerHTML = 'Orinoco/Teddies/' + products.name;
 
-            const header = document.getElementById("name_produit");
-
-            header.appendChild(createElm2('h2', products.name, 'id', 'titre', 'class', 'bloc__section__header--font'));
+            const header = document.getElementById("titre");
+            header.innerHTML = products.name;
 
             const imageproduct = document.getElementById("image_produit");
 
@@ -40,17 +39,17 @@ pageProduit = () => {
                 console.log(localStorage);
                 //let keyObj = localStorage.length;
 
-                let keyObj;
-                const tableKey = [];
-                for (let i = 0; i < localStorage.length; i++) {
-                    tableKey.push(parseInt(localStorage.key(i)));
+                let keyObj = 0;
+
+                if (localStorage.length !== 0) {
+                    const tableKey = [];
+
+                    for (let i = 0; i < localStorage.length; i++) {
+                        tableKey.push(parseInt(localStorage.key(i)));
+                    };
+                    keyObj = tableKey[0] + 1;
+                    console.log(tableKey);
                 };
-                keyObj = tableKey[0] + 1;
-                //console.log(tableKey);
-                //console.log(keyObj);
-
-
-
 
                 const order1 = {
                     key: keyObj,
@@ -59,12 +58,8 @@ pageProduit = () => {
                     price: products.price
                 };
 
-                //console.log(order1);
-
                 const newObjJson = JSON.stringify(order1);
                 localStorage.setItem(keyObj, newObjJson);
-
-                //console.log(localStorage.key(newObjJson));
 
                 window.location = 'orinoco_panier.html';
             }); //fin funtion 'click'

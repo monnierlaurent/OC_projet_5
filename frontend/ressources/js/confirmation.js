@@ -10,7 +10,7 @@ checkConfirme = () => {
 createConfirme = () => {
     const repJson = localStorage.getItem('repOrder');
     const repParse = JSON.parse(repJson);
-    console.log(repParse);
+
 
     totalpanier = () => {
         let result = 0;
