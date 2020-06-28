@@ -65,16 +65,7 @@ pageProduit = () => {
             }); //fin funtion 'click'
 
         }).catch((error => {
-
-            const section1 = document.getElementById('section_container');
-            section1.setAttribute('class', 'bloc__heading_erreur--flex');
-
-            const div1 = document.getElementById('div_container');
-            const parent = document.getElementById('section_container');
-            parent.removeChild(div1);
-
-            const div2 = section1.appendChild(createElm1('div', '', 'class', 'bloc__heading_erreur bloc__heading_erreur--detail'));
-            div2.appendChild(createElm1('h3', 'probleme d\'affichage du produit', 'class', 'bloc__section__header--font'));
+            modals('Le serveur ne repond pas', 'Retour au catalogue', './index.html');
         })); // fin cath
     }; //fin de function createProduct
     // } // fin de if

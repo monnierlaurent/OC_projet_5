@@ -25,9 +25,8 @@ createCatalog = () => {
         }); // fin boucle
 
     }).catch((err => {
-        alert('erreur serveur');
+        modals('Le serveur ne repond pas', 'Retour au catalogue', './index.html');
     })); // fin catch
-
 }; // fin function
 
 createCatalog();

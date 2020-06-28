@@ -41,78 +41,11 @@ pricesProduct = (value) => {
     });
 };
 
-// validation formulaire
+modals = (value1, value2, lien) => {
 
-/*function valideForm() {
-    const btnEnvoi = document.getElementById('envoyer_commande');
-    const prenom = document.getElementById('prenom');
-    const nom = document.getElementById('nom');
-    const adresse = document.getElementById('adresse');
-    const ville = document.getElementById('ville');
-    const email = document.getElementById('email');
-
-    const paragErreur1 = document.getElementById('erreur1');
-    const paragErreur2 = document.getElementById('erreur2');
-    const paragErreur3 = document.getElementById('erreur3');
-    const paragErreur4 = document.getElementById('erreur4');
-    const paragErreur5 = document.getElementById('erreur5');
-
-    const regexNomPrenom = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\-]+/;
-    const regexAdresse = /^[a-zA-Z0-9a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\-\,\:]+/;
-    const regexVille = /^[a-zA-Za-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\-]+/;
-    const regexEmail = /^[a-zA-Z1-9\-]+?@{1}[a-zA-Z1-9]+[.]{1}[a-zA-Z1-9]+/;
-
-    function validation() {
-
-        prenom.addEventListener('change', function(e) {
-            e.preventDefault;
-            if (regexNomPrenom.test(prenom.value) == true) {
-                paragErreur1.setAttribute('class', 'bloc__form--font--erreur2');
-                paragErreur1.innerHTML = '* champ obligatoire';
-            } else if (regexNomPrenom.test(prenom.value) == false) {
-                paragErreur1.setAttribute('class', 'bloc__form--font--erreur');
-                paragErreur1.innerHTML = 'Format du PRENOM non  conforme !!!';
-            };
-        });
-        nom.addEventListener('change', function(e) {
-            if (regexNomPrenom.test(nom.value) == true) {
-                paragErreur2.setAttribute('class', 'bloc__form--font--erreur2');
-                paragErreur2.innerHTML = '* champ obligatoire';
-            } else if (regexNomPrenom.test(nom.value) == false) {
-                paragErreur2.setAttribute('class', 'bloc__form--font--erreur');
-                paragErreur2.innerHTML = 'Format du NOM non conforme !!!';
-            };
-        });
-
-        adresse.addEventListener('change', function(e) {
-            if (regexAdresse.test(adresse.value) == true) {
-                paragErreur3.setAttribute('class', 'bloc__form--font--erreur2');
-                paragErreur3.innerHTML = '* champ obligatoire';
-            } else if (regexAdresse.test(adresse.value) == false) {
-                paragErreur3.setAttribute('class', 'bloc__form--font--erreur');
-                paragErreur3.innerHTML = 'Format de l\'ADRESSE non conforme !!!';
-            };
-        });
-
-        ville.addEventListener('change', function(e) {
-            if (regexVille.test(ville.value) == true) {
-                paragErreur4.setAttribute('class', 'bloc__form--font--erreur2');
-                paragErreur4.innerHTML = '* champ obligatoire';
-            } else if (regexVille.test(ville.value) == false) {
-                paragErreur4.setAttribute('class', 'bloc__form--font--erreur');
-                paragErreur4.innerHTML = 'Format de la VILLE non conforme !!!';
-            };
-        });
-
-        email.addEventListener('change', function(e) {
-            if (regexEmail.test(email.value) == true) {
-                paragErreur5.setAttribute('class', 'bloc__form--font--erreur2');
-                paragErreur5.innerHTML = '* champ obligatoire';
-            } else if (regexEmail.test(email.value) == false) {
-                paragErreur5.setAttribute('class', 'bloc__form--font--erreur');
-                paragErreur5.innerHTML = 'Format de l\'E-MAIL non conforme !!!';
-            };
-        });
-    }; //fin function validation
-    validation()
-};*/
+    const main = document.querySelector('main');
+    const newAside = main.appendChild(createElm2('aside', '', 'id', 'modal1', 'class', 'modal'));
+    const newDivAside = newAside.appendChild(createElm1('div', '', 'class', 'modal-wrapper'));
+    newDivAside.appendChild(createElm1('h2', value1, 'class', 'bloc__aside__heading--padding'));
+    newDivAside.appendChild(createElm2('a', value2, 'class', 'bloc__aside__button--style', 'href', lien /*'index.html'*/ ));
+};
