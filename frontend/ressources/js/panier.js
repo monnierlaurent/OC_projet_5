@@ -31,18 +31,26 @@ createPanier = () => {
 
         tablePanier.forEach(panier => {
 
+
+
+
             const tableauProduit = document.getElementById('panier_produit');
 
-            const newTr = tableauProduit.appendChild(createElm2('tr', '', 'id', 'bloc-tr', 'class', 'bloc__tr--flex'));
+            const divTable = tableauProduit.appendChild(createElm1('table', '', 'class', ' bloc__tr--flex2'));
 
-            newTr.appendChild(createElm1('td', panier.name, 'class', 'bloc__td--border bloc__td--style2 bloc--table--align--font'));
-            newTr.appendChild(createElm1('td', '1', 'class', 'bloc__td--style2'));
-            newTr.appendChild(createElm1('td', pricesProduct(panier), 'class', 'bloc__td--style2'));
-            newTr.appendChild(createElm1('td', pricesProduct(panier), 'class', 'bloc__td--style2'));
-            newTr.appendChild(createElm1('td', 'Supprimer', 'class', 'bloc__td--style2 bloc__table__button--style2 btnDeleteO'));
+            const newTr = divTable.appendChild(createElm2('tr', '', 'id', 'bloc-tr', 'class', 'bloc__tr--margin bloc__tr--flex3'));
+
+            newTr.appendChild(createElm1('td', panier.name, 'class', 'bloc__tr--margin1 bloc__td--style2'));
+            newTr.appendChild(createElm1('td', 1, 'class', 'bloc__tr--margin2 bloc__td--style2'));
+            newTr.appendChild(createElm1('td', pricesProduct(panier), 'class', 'bloc__tr--margin3 bloc__td--style2'));
+            newTr.appendChild(createElm1('td', pricesProduct(panier), 'class', 'bloc__tr--margin4 bloc__td--style2'));
+
+            const newTr2 = divTable.appendChild(createElm2('tr', '', 'id', '', 'class', 'bloc__tr__button--margin bloc__tr--flex'));
+            newTr2.appendChild(createElm1('button', 'Supprimer', 'class', ' bloc__td--style2 bloc__table__button--style2'));
 
             //-----suppression produit------
-            newTr.addEventListener('click', function(i) {
+            newTr2.addEventListener('click', (event) => {
+                event.stopPropagation();
                 alert(panier.key);
                 localStorage.removeItem(panier.key);
                 location.reload(), false;
@@ -61,9 +69,9 @@ createPanier = () => {
         newTrTotal.appendChild(createElm2('td', '', 'id', 'btn2', 'class', ''));
 
         const newbtn2 = document.getElementById('btn2');
-        newbtn2.appendChild(createElm2('button', 'tous supprimer', 'class', 'bloc__table__button--style', 'id', 'deleteTotalPanier'));
+        newbtn2.appendChild(createElm2('button', 'Tout supprimer', 'class', 'bloc__table__button--style', 'id', 'deleteTotalPanier'));
 
-        document.getElementById('deleteTotalPanier').addEventListener('click', deleteTotalPanier => {
+        document.getElementById('deleteTotalPanier').addEventListener('click', () => {
             localStorage.clear();
             location.reload(), false;
         });
@@ -116,6 +124,7 @@ validerForms = () => {
     const product_id = [];
 
     const btnEnvoi = document.getElementById('envoyer_commande');
+
     const prenom = document.getElementById('prenom');
     const nom = document.getElementById('nom');
     const adresse = document.getElementById('adresse');
@@ -135,78 +144,111 @@ validerForms = () => {
 
 
 
-    function verif() {
+    valide = () => {
+        prenom.addEventListener('change', (event) => {
 
-        if (regexNomPrenom.test(prenom.value) == true) {
-            paragErreur1.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
-            paragErreur1.innerHTML = '* champ obligatoire';
-        } else if (regexNomPrenom.test(prenom.value) == false) {
-            paragErreur1.setAttribute('class', 'bloc__form--font--erreur bloc__from--p--flex');
-            paragErreur1.innerHTML = 'Format du PRENOM non  conforme !!!';
-        };
+            event.preventDefault;
 
-        if (regexNomPrenom.test(nom.value) == true) {
-            paragErreur2.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
-            paragErreur2.innerHTML = '* champ obligatoire';
-        } else if (regexNomPrenom.test(nom.value) == false) {
-            paragErreur2.setAttribute('class', 'bloc__form--font--erreur bloc__from--p--flex');
-            paragErreur2.innerHTML = 'Format du NOM non conforme !!!';
-        };
+            if (prenom.value.length == 0) {
+                paragErreur1.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
+                paragErreur1.innerHTML = '* champ obligatoire';
+            } else if (regexNomPrenom.test(prenom.value) == true) {
+                paragErreur1.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
+                paragErreur1.innerHTML = '* champ obligatoire';
 
-        if (regexAdresse.test(adresse.value) == true) {
-            paragErreur3.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
-            paragErreur3.innerHTML = '* champ obligatoire';
-        } else if (regexAdresse.test(adresse.value) == false) {
-            paragErreur3.setAttribute('class', 'bloc__form--font--erreur bloc__from--p--flex');
-            paragErreur3.innerHTML = 'Format de l\'ADRESSE non conforme !!!';
-        };
+            } else if (regexNomPrenom.test(prenom.value) == false) {
+                paragErreur1.setAttribute('class', 'bloc__form--font--erreur bloc__from--p--flex');
+                paragErreur1.innerHTML = 'Format du PRENOM non  conforme !!!';
+            };
+        });
 
-        if (regexVille.test(ville.value) == true) {
-            paragErreur4.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
-            paragErreur4.innerHTML = '* champ obligatoire';
-        } else if (regexVille.test(ville.value) == false) {
-            paragErreur4.setAttribute('class', 'bloc__form--font--erreur bloc__from--p--flex');
-            paragErreur4.innerHTML = 'Format de la VILLE non conforme !!!';
-        };
+        nom.addEventListener('change', (event) => {
 
-        if (regexEmail.test(email.value) == true) {
-            paragErreur5.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
-            paragErreur5.innerHTML = '* champ obligatoire';
-        } else if (regexEmail.test(email.value) == false) {
-            paragErreur5.setAttribute('class', 'bloc__form--font--erreur bloc__from--p--flex');
-            paragErreur5.innerHTML = 'Format de l\'E-MAIL non conforme !!!';
-        };
-    }; //fin verif*/
+            event.preventDefault;
 
-    verif();
+            if (nom.value.length == 0) {
+                paragErreur2.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
+                paragErreur2.innerHTML = '* champ obligatoire';
+            } else if (regexNomPrenom.test(nom.value) == true) {
+                paragErreur2.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
+                paragErreur2.innerHTML = '* champ obligatoire';
+            } else if (regexNomPrenom.test(nom.value) == false) {
+                paragErreur2.setAttribute('class', 'bloc__form--font--erreur bloc__from--p--flex');
+                paragErreur2.innerHTML = 'Format du NOM non conforme !!!';
+            };
+        });
 
-    btnEnvoi.addEventListener('click', function() {
-        const contact = {
-            firstName: prenom.value,
-            lastName: nom.value,
-            address: adresse.value,
-            city: ville.value,
-            email: email.value
-        };
+        adresse.addEventListener('change', (event) => {
+            event.preventDefault;
+            if (adresse.value.length == 0) {
+                paragErreur3.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
+                paragErreur3.innerHTML = '* champ obligatoire';
+            } else if (regexAdresse.test(adresse.value) == true) {
+                paragErreur3.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
+                paragErreur3.innerHTML = '* champ obligatoire';
+            } else if (regexAdresse.test(adresse.value) == false) {
+                paragErreur3.setAttribute('class', 'bloc__form--font--erreur bloc__from--p--flex');
+                paragErreur3.innerHTML = 'Format de l\'ADRESSE non conforme !!!';
+            };
+        });
 
-        const storage2 = localStorage.length;
+        ville.addEventListener('change', (event) => {
+            event.preventDefault;
+            if (ville.value.length == 0) {
+                paragErreur4.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
+                paragErreur4.innerHTML = '* champ obligatoire';
+            } else if (regexVille.test(ville.value) == true) {
+                paragErreur4.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
+                paragErreur4.innerHTML = '* champ obligatoire';
+            } else if (regexVille.test(ville.value) == false) {
+                paragErreur4.setAttribute('class', 'bloc__form--font--erreur bloc__from--p--flex');
+                paragErreur4.innerHTML = 'Format de la VILLE non conforme !!!';
+            };
+        });
+        email.addEventListener('change', (event) => {
+            event.preventDefault;
+            if (email.value.length == 0) {
+                paragErreur5.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
+                paragErreur5.innerHTML = '* champ obligatoire';
+            } else if (regexEmail.test(email.value) == true) {
+                paragErreur5.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
+                paragErreur5.innerHTML = '* champ obligatoire';
+            } else if (regexEmail.test(email.value) == false) {
+                paragErreur5.setAttribute('class', 'bloc__form--font--erreur bloc__from--p--flex');
+                paragErreur5.innerHTML = 'Format de l\'E-MAIL non conforme !!!';
+            };
+        });
+    };
 
-        for (let i = 0; i < storage2; i++) {
-            const objJSON2 = localStorage.getItem(localStorage.key(i));
-            const objJsonParse2 = JSON.parse(objJSON2);
+    valide();
+    btnEnvoi.addEventListener('click', (event) => {
+        event.preventDefault();
 
-            product_id.push(objJsonParse2.id);
-        };
 
-        const order = {
-            contact: contact,
-            products: product_id
-        };
+        if (regexNomPrenom.test(prenom.value) == true, regexNomPrenom.test(nom.value) == true, regexAdresse.test(adresse.value) == true, regexVille.test(ville.value) == true, regexEmail.test(email.value) == true) {
+            const contact = {
+                firstName: prenom.value,
+                lastName: nom.value,
+                address: adresse.value,
+                city: ville.value,
+                email: email.value
+            };
 
-        if (contact.firstName == false, contact.lastName == false, contact.address == false, contact.ville == false, contact.email == false) {
+            const storage2 = localStorage.length;
+
+            for (let i = 0; i < storage2; i++) {
+                const objJSON2 = localStorage.getItem(localStorage.key(i));
+                const objJsonParse2 = JSON.parse(objJSON2);
+
+                product_id.push(objJsonParse2.id);
+            };
+
+            const order = {
+                contact: contact,
+                products: product_id
+            };
+
             modals('Le formulaire n\'est complet', 'Revenir au panier', './orinoco_panier.html');
-            //alert('formulaire mal rempli');
-        } else {
             const datas = send('http://localhost:3000/api/teddies/order', order);
             datas.then(rep => {
 
@@ -220,7 +262,9 @@ validerForms = () => {
             }).catch((error => {
                 modals('Le serveur ne repond pas', 'Retour au catalogue', './index.html');
             })); //fin catch
-        }; // fin de else
+        } else {
+            modals('Le formulaire n\'est pas correct', 'Retour au panier', './orinoco_panier.html');
+        }; //fin de else
     }); //fin de listner
 }; //fin validform
 

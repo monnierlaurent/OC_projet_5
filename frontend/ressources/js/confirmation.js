@@ -1,7 +1,7 @@
 checkConfirme = () => {
 
     if (localStorage.length === 0) {
-        alert('erreur de chargement'); // faire un veritable message d'erreur en html
+        window.location = 'index.html';
     } else {
         createConfirme();
     };
@@ -24,7 +24,7 @@ createConfirme = () => {
     };
 
     document.getElementById('num_commande').innerHTML = 'commande n° : ' + repParse.orderId;
-    document.getElementById('total_commande').innerHTML = 'd\'un montant de : ' + totalpanier();
+    document.getElementById('total_commande').innerHTML = 'd\'un montant total de : ' + totalpanier();
 
 
     const retourCatalogue1 = document.getElementById('retourCat1');
