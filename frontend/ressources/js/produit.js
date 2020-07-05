@@ -55,6 +55,7 @@ pageProduit = () => {
                     key: keyObj,
                     id: products._id,
                     name: products.name,
+                    qte: 1,
                     price: products.price
                 };
 

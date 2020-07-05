@@ -18,7 +18,13 @@ createPanier = () => {
 
             tablePanier.push(objJsonParse);
         };
+
+
+
+
+        //calcul du prix total du panier
         totalpanier = () => {
+
             let result = 0;
             tablePanier.forEach(total => {
                 result += total.price / 100;
@@ -31,26 +37,21 @@ createPanier = () => {
 
         tablePanier.forEach(panier => {
 
+            const tableauProduit = document.getElementById('panier_produit2');
 
+            const newdiv = tableauProduit.appendChild(createElm1('div', '', 'class', 'bloc__tr--flex'));
 
+            newdiv.appendChild(createElm1('p', panier.name, 'class', 'bloc__tr--margin1 bloc__td--style2'));
+            newdiv.appendChild(createElm1('p', panier.qte, 'class', 'bloc__tr--margin2 bloc__td--style2'));
+            newdiv.appendChild(createElm1('p', pricesProduct(panier), 'class', 'bloc__tr--margin3 bloc__td--style2'));
+            newdiv.appendChild(createElm1('p', pricesProduct(panier), 'class', 'bloc__tr--margin4 bloc__td--style2'));
 
-            const tableauProduit = document.getElementById('panier_produit');
-
-            const divTable = tableauProduit.appendChild(createElm1('table', '', 'class', ' bloc__tr--flex2'));
-
-            const newTr = divTable.appendChild(createElm2('tr', '', 'id', 'bloc-tr', 'class', 'bloc__tr--margin bloc__tr--flex3'));
-
-            newTr.appendChild(createElm1('td', panier.name, 'class', 'bloc__tr--margin1 bloc__td--style2'));
-            newTr.appendChild(createElm1('td', 1, 'class', 'bloc__tr--margin2 bloc__td--style2'));
-            newTr.appendChild(createElm1('td', pricesProduct(panier), 'class', 'bloc__tr--margin3 bloc__td--style2'));
-            newTr.appendChild(createElm1('td', pricesProduct(panier), 'class', 'bloc__tr--margin4 bloc__td--style2'));
-
-            const newTr2 = divTable.appendChild(createElm2('tr', '', 'id', '', 'class', 'bloc__tr__button--margin bloc__tr--flex'));
-            newTr2.appendChild(createElm1('button', 'Supprimer', 'class', ' bloc__td--style2 bloc__table__button--style2'));
+            const newDivBtn = newdiv.appendChild(createElm1('div', '', 'class', 'bloc__td--style bloc__btn--padding'));
+            newDivBtn.appendChild(createElm1('button', 'Supprimer', 'class', 'bloc__table__button--style2'));
 
             //-----suppression produit------
-            newTr2.addEventListener('click', (event) => {
-                event.stopPropagation();
+            newDivBtn.addEventListener('click', () => {
+
                 alert(panier.key);
                 localStorage.removeItem(panier.key);
                 location.reload(), false;

@@ -97,6 +97,11 @@ body {
     font-size: 2.5em;
 }
 
+.bloc__section__header--font2 {
+    font-family: "belligerent";
+    font-size: 2.5em;
+}
+
 .bloc__section__article--border {
     margin-bottom: 2em;
     width: 50%;
@@ -300,10 +305,6 @@ button:focus,
 
 /*tableau de produit*/
 
-table {
-    line-height: 1.5;
-}
-
 #panier_produit {
     width: 100%;
     display: flex;
@@ -314,59 +315,12 @@ table {
 .bloc__tr--flex {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.bloc__tr--flex2 {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.bloc__tr--flex3 {
-    width: 90%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.bloc__tr--margin {
-    margin-left: 6.4em;
-}
-
-.bloc__tr--margin1 {
-    margin-right: 8em;
-}
-
-.bloc__tr--margin2 {
-    margin-left: 1.5em;
-}
-
-.bloc__tr--margin3 {
-    margin-left: 8.5em;
-}
-
-.bloc__tr--margin4 {
-    margin-left: 6.5em;
-}
-
-.bloc__tr__button--margin {
-    margin-right: 8em;
-}
-
 .bloc__td--style {
-    color: var(--violet2);
-    text-align: center;
-    font-size: 2em;
-    padding-bottom: 0.5em;
-}
-
-.bloc__td--style1 {
-    
+    width: 20%;
     color: var(--violet2);
     text-align: center;
     font-size: 2em;
@@ -374,17 +328,19 @@ table {
 }
 
 .bloc__td--style2 {
+    width: 20%;
     text-align: center;
-    font-size: 1.7em;
+    font-size: 2em;
+    padding-bottom: 0.5em;
 }
 
 .bloc__table__button--style2 {
+    display: flex;
     font-family: "belligerent";
     font-size: 1em;
     background-color: var(--violet2);
     border-radius: 20px;
     border: solid 3px var(--violet);
-    padding: 0.3em;
 }
 
 
@@ -700,6 +656,15 @@ table {
         width: 60%;
         font-size: 1.5em;
     }
+    .bloc__td--style {
+        font-size: 1.5em;
+    }
+    .bloc__td--style2 {
+        font-size: 1.5em;
+    }
+    .bloc__table--padding {
+        font-size: 1.5em;
+    }
 }
 
 @media screen and (max-width: 808px) {
@@ -727,6 +692,9 @@ table {
     .bloc__nav--lien {
         padding-right: 0;
     }
+    .bloc__section__header--font2 {
+        font-size: 2em;
+    }
 }
 
 @media screen and (max-width: 726px) {
@@ -751,6 +719,15 @@ table {
 @media screen and (max-width: 658px) {
     .bloc__form__div__width {
         width: 100%;
+    }
+    .bloc__td--style {
+        font-size: 1em;
+    }
+    .bloc__td--style2 {
+        font-size: 1em;
+    }
+    .bloc__table--padding {
+        font-size: 1em;
     }
 }
 
@@ -819,6 +796,17 @@ table {
         width: 20%;
         font-size: 1.2em;
     }
+    .bloc__section__header--font2 {
+        font-size: 1.5em;
+    }
+    .bloc__section_3__parag--font {
+        font-size: 1em;
+        line-height: 2em;
+    }
+    .button--font {
+        font-size: 1em;
+        padding: 0.3em;
+    }
 }
 
 @media screen and (max-width: 562px) {
@@ -874,6 +862,29 @@ table {
     }
 }
 
+@media screen and (max-width: 461px) {
+    .bloc__section__article--image {
+        width: 22em;
+        height: auto;
+    }
+    .bloc__td--style {
+        font-size: 0.8em;
+    }
+    .bloc__td--style2 {
+        font-size: 0.8em;
+    }
+    .bloc__table--padding {
+        font-size: 0.8em;
+    }
+    .bloc__section__header--font2 {
+        font-size: 1.2em;
+    }
+    .bloc__section_3__parag--font {
+        font-size: 0.8em;
+        line-height: 1.5em;
+    }
+}
+
 @media screen and (max-width: 454px) {
     .bloc__td--style0 {
         width: 20%;
@@ -882,13 +893,6 @@ table {
     .bloc__td--style2 {
         width: 20%;
         font-size: 0.7em;
-    }
-}
-
-@media screen and (max-width: 461px) {
-    .bloc__section__article--image {
-        width: 22em;
-        height: auto;
     }
 }
 
@@ -920,36 +924,44 @@ table {
         width: 20em;
         height: auto;
     }
+    .bloc__table--display {
+        display: none;
+    }
+    .bloc__tr--flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-bottom: solid 1px var(--violet2);
+        width: 50%;
+        margin: auto;
+        text-align: center;
+        padding-top: 1em;
+    }
+    .bloc__td--style {
+        width: 100%;
+    }
+    .bloc__td--style2 {
+        width: 100%;
+    }
+    .bloc__td--style {
+        font-size: 1.2em;
+    }
+    .bloc__td--style2 {
+        font-size: 1.2em;
+    }
+    .bloc__table--padding {
+        font-size: 1.2em;
+    }
+    .bloc__btn--padding {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 @media screen and (max-width: 376px) {
     .bloc__main--seize {
         border: none;
-    }
-    #panier_produit {
-        display: flex;
-        flex-direction: row;
-    }
-    .bloc__tr--flex {
-        display: flex;
-        flex-direction: column;
-    }
-    .bloc__td--style0 {
-        border: none;
-        color: var(--violet2);
-        width: 40%;
-        text-align: center;
-        font-size: 1.5em;
-        padding-bottom: 0;
-        padding-right: 0.5em;
-    }
-    .bloc__td--style2 {
-        width: 100%;
-        border: none;
-        font-size: 1.2em;
-        text-align: left;
-        padding-left: 0.5em;
-        border-left: solid 3px var(--violet);
     }
 }
 
@@ -972,6 +984,9 @@ table {
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
+    }
+    .bloc__section__header--font2 {
+        font-size: 1em;
     }
 }
 
@@ -1010,6 +1025,9 @@ table {
     .bloc__form--font--erreur2 {
         color: black;
         font-size: 0.7em;
+    }
+    .bloc__section__header--font2 {
+        font-size: 0.8em;
     }
 }
 
@@ -1094,6 +1112,9 @@ table {
         color: black;
         font-size: 0.7em;
     }
+    .bloc__section__header--font2 {
+        font-size: 0.7em;
+    }
 }
 
 @media screen and (max-width: 237px) {
@@ -1154,6 +1175,9 @@ table {
         width: 95%;
         padding-left: 0;
         padding-right: 0;
+        font-size: 0.6em;
+    }
+    .bloc__section__header--font2 {
         font-size: 0.6em;
     }
 }
