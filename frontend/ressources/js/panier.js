@@ -19,9 +19,6 @@ createPanier = () => {
             tablePanier.push(objJsonParse);
         };
 
-
-
-
         //calcul du prix total du panier
         totalpanier = () => {
 
@@ -52,7 +49,6 @@ createPanier = () => {
             //-----suppression produit------
             newDivBtn.addEventListener('click', () => {
 
-                alert(panier.key);
                 localStorage.removeItem(panier.key);
                 location.reload(), false;
             });
@@ -224,7 +220,6 @@ validerForms = () => {
     valide();
     btnEnvoi.addEventListener('click', (event) => {
         event.preventDefault();
-
 
         if (regexNomPrenom.test(prenom.value) == true, regexNomPrenom.test(nom.value) == true, regexAdresse.test(adresse.value) == true, regexVille.test(ville.value) == true, regexEmail.test(email.value) == true) {
             const contact = {
