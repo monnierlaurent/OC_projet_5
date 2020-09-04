@@ -1,12 +1,11 @@
 checkConfirme = () => {
 
     if (localStorage.length === 0) {
-        window.location = 'index.html';
+        modals('Votre panier est vide', 'Retour au panier', './index.html');
     } else {
         createConfirme();
     };
 };
-
 createConfirme = () => {
     const repJson = localStorage.getItem('repOrder');
     const repParse = JSON.parse(repJson);
@@ -22,6 +21,8 @@ createConfirme = () => {
             currency: 'EUR'
         });
     };
+
+
 
     document.getElementById('num_commande').innerHTML = 'commande n° : ' + repParse.orderId;
     document.getElementById('total_commande').innerHTML = 'd\'un montant total de : ' + totalpanier();

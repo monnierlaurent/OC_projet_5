@@ -14,6 +14,7 @@ html {
     --rose: #F3E9F1;
     --violet: #D1C4E9;
     --violet2: #935DF3;
+    --rouge: #f44336;
 }
 
 * {
@@ -153,7 +154,7 @@ body {
 }
 
 .bloc__footer__lien--color:hover {
-    color: red;
+    color: var(--rouge);
 }
 
 .bloc__footer__img--seize {
@@ -192,7 +193,7 @@ button:hover,
 .bloc__section_4__button--style:hover,
 .bloc__section_2__button_2--style:hover {
     opacity: 0.8;
-    color: red;
+    color: var(--rouge);
     cursor: pointer;
 }
 
@@ -202,7 +203,7 @@ button:focus,
 .bloc__section_2__button--style:focus,
 .bloc__section_4__button--style:focus,
 .bloc__section_2__button_2--style:focus {
-    border: solid 1px red;
+    border: solid 1px var(--rouge);
 }
 
 
@@ -302,6 +303,10 @@ button:focus,
 
 /*-----panier-----*/
 
+.bloc__section__panier {
+    display: none;
+}
+
 
 /*tableau de produit*/
 
@@ -362,7 +367,7 @@ button:focus,
 
 .bloc__table--padding--colors--price--total2 {
     padding-right: 1em;
-    color: red;
+    color: var(--rouge);
 }
 
 .bloc__form--border {
@@ -398,6 +403,18 @@ button:focus,
 
 .bloc__from--p--flex {
     align-self: flex-end;
+}
+
+.bloc__from--p--flex_2 {
+    align-self: center;
+    padding-top: 1.5em;
+    color: var(--rose);
+}
+
+.bloc__from--p--flex_3 {
+    align-self: center;
+    padding-top: 1.5em;
+    color: var(--rouge);
 }
 
 .bloc__form__label--font--seize {
@@ -506,7 +523,7 @@ button:focus,
 /*---fin modal---*/
 
 .bloc__form--font--erreur {
-    color: red;
+    color: var(--rouge);
 }
 
 .bloc__form--font--erreur2 {
@@ -1019,7 +1036,7 @@ button:focus,
         font-size: 1.2em;
     }
     .bloc__form--font--erreur {
-        color: red;
+        color: var(--rouge);
         font-size: 0.9em;
     }
     .bloc__form--font--erreur2 {
@@ -1105,7 +1122,7 @@ button:focus,
         font-size: 1em;
     }
     .bloc__form--font--erreur {
-        color: red;
+        color: var(--rouge);
         font-size: 0.7em;
     }
     .bloc__form--font--erreur2 {
@@ -1157,7 +1174,7 @@ button:focus,
         font-size: 0.8em;
     }
     .bloc__form--font--erreur {
-        color: red;
+        color: var(--rouge);
         font-size: 0.9em;
     }
     .bloc__form--font--erreur2 {

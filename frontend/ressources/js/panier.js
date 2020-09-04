@@ -109,7 +109,7 @@ createPanier = () => {
         newdiv0.appendChild(newdiv5);
 
         newdiv0.appendChild(createElm3('div', 'Commander', 'id', 'envoyer_commande', 'class', ' bloc__section_4__button--style', 'type', 'submit'));
-
+        newdiv0.appendChild(createElm2('p', 'le formulaire n\'est pas correct', 'id', 'erreur6', 'class', 'bloc__from--p--flex_2'));
     } //fin de create panier
 
 checkPanier();
@@ -128,32 +128,38 @@ validerForms = () => {
     const ville = document.getElementById('ville');
     const email = document.getElementById('email');
 
+
+
     const paragErreur1 = document.getElementById('erreur1');
     const paragErreur2 = document.getElementById('erreur2');
     const paragErreur3 = document.getElementById('erreur3');
     const paragErreur4 = document.getElementById('erreur4');
     const paragErreur5 = document.getElementById('erreur5');
 
-    const regexNomPrenom = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\-]+/;
-    const regexAdresse = /^[a-zA-Z0-9a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\-\,\:]+/;
-    const regexVille = /^[a-zA-Za-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\-]+/;
-    const regexEmail = /^[a-zA-Z1-9\-]+?@{1}[a-zA-Z1-9]+[.]{1}[a-zA-Z1-9]+/;
+
+    const regexPrenom = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ \'.-]{2,20} *$/;
+    const regexNom = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ \'.-]{2,20} *$/;
+    const regexAdresse = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ \'.-]{2,20} *$/;
+    const regexVille = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ \'.-]{2,20} *$/;
+    const regexEmail = /^[a-zA-Z1-9-._]+?@{1}[a-zA-Z1-9.-_]+[.]{1}[a-zA-Z1-9]{2,10}$/;
 
 
 
-    valide = () => {
+    valide = (e) => {
+
         prenom.addEventListener('change', (event) => {
 
             event.preventDefault;
 
-            if (prenom.value.length == 0) {
+            if (prenom.value.length === 0) {
                 paragErreur1.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
                 paragErreur1.innerHTML = '* champ obligatoire';
-            } else if (regexNomPrenom.test(prenom.value) == true) {
+                return false;
+            } else if (regexPrenom.test(prenom.value) == true) {
                 paragErreur1.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
                 paragErreur1.innerHTML = '* champ obligatoire';
 
-            } else if (regexNomPrenom.test(prenom.value) == false) {
+            } else if (regexPrenom.test(prenom.value) == false) {
                 paragErreur1.setAttribute('class', 'bloc__form--font--erreur bloc__from--p--flex');
                 paragErreur1.innerHTML = 'Format du PRENOM non  conforme !!!';
             };
@@ -163,13 +169,13 @@ validerForms = () => {
 
             event.preventDefault;
 
-            if (nom.value.length == 0) {
+            if (nom.value.length === 0) {
                 paragErreur2.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
                 paragErreur2.innerHTML = '* champ obligatoire';
-            } else if (regexNomPrenom.test(nom.value) == true) {
+            } else if (regexNom.test(nom.value) == true) {
                 paragErreur2.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
                 paragErreur2.innerHTML = '* champ obligatoire';
-            } else if (regexNomPrenom.test(nom.value) == false) {
+            } else if (regexNom.test(nom.value) == false) {
                 paragErreur2.setAttribute('class', 'bloc__form--font--erreur bloc__from--p--flex');
                 paragErreur2.innerHTML = 'Format du NOM non conforme !!!';
             };
@@ -177,21 +183,23 @@ validerForms = () => {
 
         adresse.addEventListener('change', (event) => {
             event.preventDefault;
-            if (adresse.value.length == 0) {
+            if (adresse.value.length === 0) {
                 paragErreur3.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
                 paragErreur3.innerHTML = '* champ obligatoire';
             } else if (regexAdresse.test(adresse.value) == true) {
                 paragErreur3.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
                 paragErreur3.innerHTML = '* champ obligatoire';
+
             } else if (regexAdresse.test(adresse.value) == false) {
                 paragErreur3.setAttribute('class', 'bloc__form--font--erreur bloc__from--p--flex');
                 paragErreur3.innerHTML = 'Format de l\'ADRESSE non conforme !!!';
+
             };
         });
 
         ville.addEventListener('change', (event) => {
             event.preventDefault;
-            if (ville.value.length == 0) {
+            if (ville.value.length === 0) {
                 paragErreur4.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
                 paragErreur4.innerHTML = '* champ obligatoire';
             } else if (regexVille.test(ville.value) == true) {
@@ -204,7 +212,7 @@ validerForms = () => {
         });
         email.addEventListener('change', (event) => {
             event.preventDefault;
-            if (email.value.length == 0) {
+            if (email.value.length === 0) {
                 paragErreur5.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
                 paragErreur5.innerHTML = '* champ obligatoire';
             } else if (regexEmail.test(email.value) == true) {
@@ -221,46 +229,81 @@ validerForms = () => {
     btnEnvoi.addEventListener('click', (event) => {
         event.preventDefault();
 
-        if (regexNomPrenom.test(prenom.value) == true, regexNomPrenom.test(nom.value) == true, regexAdresse.test(adresse.value) == true, regexVille.test(ville.value) == true, regexEmail.test(email.value) == true) {
-            const contact = {
-                firstName: prenom.value,
-                lastName: nom.value,
-                address: adresse.value,
-                city: ville.value,
-                email: email.value
+        if (regexPrenom.test(prenom.value) === true, prenom.value === true, regexNom.test(nom.value) === true, regexAdresse.test(adresse.value) === true, regexVille.test(ville.value) === true, regexEmail.test(email.value) === true) {
+            if (prenom.value.length > 1 & nom.value.length > 1 & adresse.value.length > 1 & ville.value.length > 1 & email.value.length > 1) {
+
+                const contact = {
+                    firstName: prenom.value,
+                    lastName: nom.value,
+                    address: adresse.value,
+                    city: ville.value,
+                    email: email.value
+                };
+
+                const storage2 = localStorage.length;
+
+                for (let i = 0; i < storage2; i++) {
+                    const objJSON2 = localStorage.getItem(localStorage.key(i));
+                    const objJsonParse2 = JSON.parse(objJSON2);
+
+                    product_id.push(objJsonParse2.id);
+                };
+
+                const order = {
+                    contact: contact,
+                    products: product_id
+                };
+
+                const datas = send('http://localhost:3000/api/teddies/order', order);
+                datas.then(rep => {
+
+                    localStorage.clear();
+
+                    const repstring = JSON.stringify(rep);
+                    localStorage.setItem('repOrder', repstring);
+
+                    // window.location = 'orinoco_confirmation_commande.html';
+
+                    // masquage du header + section tableau produit + formulaire 
+                    const sectionTAblePanier = document.getElementById('bloc__section__panier');
+                    sectionTAblePanier.setAttribute('class', 'bloc__section__panier');
+
+                    const formClient = document.getElementById('formulaire');
+                    formClient.setAttribute('class', 'bloc__section__panier');
+
+                    //creation de la page de confirmation
+                    const sectionConfirm = document.getElementById('bloc__section__confirmation');
+                    sectionConfirm.setAttribute('class', 'bloc__section_3__padding');
+
+                    sectionConfirm.appendChild(createElm2('header', '', 'id', 'header_confirm', 'class', 'bloc__header--flex'));
+
+                    const headerConfirm = document.getElementById('header_confirm');
+                    headerConfirm.appendChild(createElm1('h2', 'Nous vous remercions de votre commande', 'class', 'bloc__section__header--font2'));
+
+                    sectionConfirm.appendChild(createElm2('p', '', 'id', 'num_commande', 'class', 'bloc__section_3__parag--font'));
+                    sectionConfirm.appendChild(createElm2('p', '', 'id', 'total_commande', 'class', 'bloc__section_3__parag--font'));
+                    sectionConfirm.appendChild(createElm1('p', 'Vous serez livré dans les meilleurs délais', 'class', 'bloc__section_3__parag--font'));
+                    sectionConfirm.appendChild(createElm1('p', 'A bientôt', 'class', 'bloc__section_3__parag--font'));
+                    sectionConfirm.appendChild(createElm2('a', 'Retour au catalogue', 'id', 'retourCat2', 'class', 'bloc__section_2__button_2--style button--font'));
+
+                    const retourCatalogue2 = document.getElementById('retourCat2');
+                    retourCatalogue2.addEventListener('click', function() {
+                        localStorage.clear();
+                        window.location = 'index.html';
+                    });
+
+                    checkConfirme();
+
+                }).catch((error => {
+
+                })); //fin catch
+            } else
+            if (regexPrenom.test(prenom.value) == false, regexNom.test(nom.value) == false, regexAdresse.test(adresse.value) == false, regexVille.test(ville.value) == false, regexEmail.test(email.value) == false) {
+                const erreurForm = document.getElementById('erreur6');
+                erreurForm.classList.remove('bloc__from--p--flex_2');
+                erreurForm.setAttribute('class', 'bloc__from--p--flex_3');
             };
-
-            const storage2 = localStorage.length;
-
-            for (let i = 0; i < storage2; i++) {
-                const objJSON2 = localStorage.getItem(localStorage.key(i));
-                const objJsonParse2 = JSON.parse(objJSON2);
-
-                product_id.push(objJsonParse2.id);
-            };
-
-            const order = {
-                contact: contact,
-                products: product_id
-            };
-
-            modals('Le formulaire n\'est complet', 'Revenir au panier', './orinoco_panier.html');
-            const datas = send('http://localhost:3000/api/teddies/order', order);
-            datas.then(rep => {
-
-                localStorage.clear();
-
-                const repstring = JSON.stringify(rep);
-                localStorage.setItem('repOrder', repstring);
-
-                window.location = 'orinoco_confirmation_commande.html';
-
-            }).catch((error => {
-                modals('Le serveur ne repond pas', 'Retour au catalogue', './index.html');
-            })); //fin catch
-        } else {
-            modals('Le formulaire n\'est pas correct', 'Retour au panier', './orinoco_panier.html');
-        }; //fin de else
+        }; //fin du 2eme if
     }); //fin de listner
 }; //fin validform
 
