@@ -230,7 +230,6 @@ validerForms = () => {
         event.preventDefault();
 
         if (regexPrenom.test(prenom.value) !== false && prenom.value !== false && regexNom.test(nom.value) !== false && regexAdresse.test(adresse.value) !== false && regexVille.test(ville.value) !== false && regexEmail.test(email.value) !== false) {
-            //if ( & nom.value.length > 1 & adresse.value.length > 1 & ville.value.length > 1 & email.value.length > 1) {
 
             const contact = {
                 firstName: prenom.value,
@@ -262,7 +261,7 @@ validerForms = () => {
                 const repstring = JSON.stringify(rep);
                 localStorage.setItem('repOrder', repstring);
 
-                // window.location = 'orinoco_confirmation_commande.html';
+
 
                 // masquage du header + section tableau produit + formulaire 
                 const sectionTAblePanier = document.getElementById('bloc__section__panier');
@@ -297,7 +296,7 @@ validerForms = () => {
             }).catch((error => {
 
             })); //fin catch
-        } else
+        } else // message erreur de remplissage du formulaire
         if (regexPrenom.test(prenom.value) == false, regexNom.test(nom.value) == false, regexAdresse.test(adresse.value) == false, regexVille.test(ville.value) == false, regexEmail.test(email.value) == false) {
             const erreurForm = document.getElementById('erreur6');
             erreurForm.classList.remove('bloc__from--p--flex_2');

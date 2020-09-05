@@ -9,7 +9,7 @@ async function send(url, datas) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(datas)
-    }); //fin fetch
+    });
     let data2 = await response.json();
     return data2;
 };
