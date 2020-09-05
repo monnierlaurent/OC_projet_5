@@ -139,7 +139,7 @@ validerForms = () => {
 
     const regexPrenom = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ \'.-]{2,20} *$/;
     const regexNom = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ \'.-]{2,20} *$/;
-    const regexAdresse = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ \'.-]{2,20} *$/;
+    const regexAdresse = /^[0-9]{1,3}(([,. ]?){1}[-a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ']+)/;
     const regexVille = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ \'.-]{2,20} *$/;
     const regexEmail = /^[a-zA-Z1-9-._]+?@{1}[a-zA-Z1-9.-_]+[.]{1}[a-zA-Z1-9]{2,10}$/;
 
@@ -229,81 +229,81 @@ validerForms = () => {
     btnEnvoi.addEventListener('click', (event) => {
         event.preventDefault();
 
-        if (regexPrenom.test(prenom.value) === true, prenom.value === true, regexNom.test(nom.value) === true, regexAdresse.test(adresse.value) === true, regexVille.test(ville.value) === true, regexEmail.test(email.value) === true) {
-            if (prenom.value.length > 1 & nom.value.length > 1 & adresse.value.length > 1 & ville.value.length > 1 & email.value.length > 1) {
+        if (regexPrenom.test(prenom.value) !== false && prenom.value !== false && regexNom.test(nom.value) !== false && regexAdresse.test(adresse.value) !== false && regexVille.test(ville.value) !== false && regexEmail.test(email.value) !== false) {
+            //if ( & nom.value.length > 1 & adresse.value.length > 1 & ville.value.length > 1 & email.value.length > 1) {
 
-                const contact = {
-                    firstName: prenom.value,
-                    lastName: nom.value,
-                    address: adresse.value,
-                    city: ville.value,
-                    email: email.value
-                };
-
-                const storage2 = localStorage.length;
-
-                for (let i = 0; i < storage2; i++) {
-                    const objJSON2 = localStorage.getItem(localStorage.key(i));
-                    const objJsonParse2 = JSON.parse(objJSON2);
-
-                    product_id.push(objJsonParse2.id);
-                };
-
-                const order = {
-                    contact: contact,
-                    products: product_id
-                };
-
-                const datas = send('http://localhost:3000/api/teddies/order', order);
-                datas.then(rep => {
-
-                    localStorage.clear();
-
-                    const repstring = JSON.stringify(rep);
-                    localStorage.setItem('repOrder', repstring);
-
-                    // window.location = 'orinoco_confirmation_commande.html';
-
-                    // masquage du header + section tableau produit + formulaire 
-                    const sectionTAblePanier = document.getElementById('bloc__section__panier');
-                    sectionTAblePanier.setAttribute('class', 'bloc__section__panier');
-
-                    const formClient = document.getElementById('formulaire');
-                    formClient.setAttribute('class', 'bloc__section__panier');
-
-                    //creation de la page de confirmation
-                    const sectionConfirm = document.getElementById('bloc__section__confirmation');
-                    sectionConfirm.setAttribute('class', 'bloc__section_3__padding');
-
-                    sectionConfirm.appendChild(createElm2('header', '', 'id', 'header_confirm', 'class', 'bloc__header--flex'));
-
-                    const headerConfirm = document.getElementById('header_confirm');
-                    headerConfirm.appendChild(createElm1('h2', 'Nous vous remercions de votre commande', 'class', 'bloc__section__header--font2'));
-
-                    sectionConfirm.appendChild(createElm2('p', '', 'id', 'num_commande', 'class', 'bloc__section_3__parag--font'));
-                    sectionConfirm.appendChild(createElm2('p', '', 'id', 'total_commande', 'class', 'bloc__section_3__parag--font'));
-                    sectionConfirm.appendChild(createElm1('p', 'Vous serez livré dans les meilleurs délais', 'class', 'bloc__section_3__parag--font'));
-                    sectionConfirm.appendChild(createElm1('p', 'A bientôt', 'class', 'bloc__section_3__parag--font'));
-                    sectionConfirm.appendChild(createElm2('a', 'Retour au catalogue', 'id', 'retourCat2', 'class', 'bloc__section_2__button_2--style button--font'));
-
-                    const retourCatalogue2 = document.getElementById('retourCat2');
-                    retourCatalogue2.addEventListener('click', function() {
-                        localStorage.clear();
-                        window.location = 'index.html';
-                    });
-
-                    checkConfirme();
-
-                }).catch((error => {
-
-                })); //fin catch
-            } else
-            if (regexPrenom.test(prenom.value) == false, regexNom.test(nom.value) == false, regexAdresse.test(adresse.value) == false, regexVille.test(ville.value) == false, regexEmail.test(email.value) == false) {
-                const erreurForm = document.getElementById('erreur6');
-                erreurForm.classList.remove('bloc__from--p--flex_2');
-                erreurForm.setAttribute('class', 'bloc__from--p--flex_3');
+            const contact = {
+                firstName: prenom.value,
+                lastName: nom.value,
+                address: adresse.value,
+                city: ville.value,
+                email: email.value
             };
-        }; //fin du 2eme if
+
+            const storage2 = localStorage.length;
+
+            for (let i = 0; i < storage2; i++) {
+                const objJSON2 = localStorage.getItem(localStorage.key(i));
+                const objJsonParse2 = JSON.parse(objJSON2);
+
+                product_id.push(objJsonParse2.id);
+            };
+
+            const order = {
+                contact: contact,
+                products: product_id
+            };
+
+            const datas = send('http://localhost:3000/api/teddies/order', order);
+            datas.then(rep => {
+
+                localStorage.clear();
+
+                const repstring = JSON.stringify(rep);
+                localStorage.setItem('repOrder', repstring);
+
+                // window.location = 'orinoco_confirmation_commande.html';
+
+                // masquage du header + section tableau produit + formulaire 
+                const sectionTAblePanier = document.getElementById('bloc__section__panier');
+                sectionTAblePanier.setAttribute('class', 'bloc__section__panier');
+
+                const formClient = document.getElementById('formulaire');
+                formClient.setAttribute('class', 'bloc__section__panier');
+
+                //creation de la page de confirmation
+                const sectionConfirm = document.getElementById('bloc__section__confirmation');
+                sectionConfirm.setAttribute('class', 'bloc__section_3__padding');
+
+                sectionConfirm.appendChild(createElm2('header', '', 'id', 'header_confirm', 'class', 'bloc__header--flex'));
+
+                const headerConfirm = document.getElementById('header_confirm');
+                headerConfirm.appendChild(createElm1('h2', 'Nous vous remercions de votre commande', 'class', 'bloc__section__header--font2'));
+
+                sectionConfirm.appendChild(createElm2('p', '', 'id', 'num_commande', 'class', 'bloc__section_3__parag--font'));
+                sectionConfirm.appendChild(createElm2('p', '', 'id', 'total_commande', 'class', 'bloc__section_3__parag--font'));
+                sectionConfirm.appendChild(createElm1('p', 'Vous serez livré dans les meilleurs délais', 'class', 'bloc__section_3__parag--font'));
+                sectionConfirm.appendChild(createElm1('p', 'A bientôt', 'class', 'bloc__section_3__parag--font'));
+                sectionConfirm.appendChild(createElm2('a', 'Retour au catalogue', 'id', 'retourCat2', 'class', 'bloc__section_2__button_2--style button--font'));
+
+                const retourCatalogue2 = document.getElementById('retourCat2');
+                retourCatalogue2.addEventListener('click', function() {
+                    localStorage.clear();
+                    window.location = 'index.html';
+                });
+
+                checkConfirme();
+
+            }).catch((error => {
+
+            })); //fin catch
+        } else
+        if (regexPrenom.test(prenom.value) == false, regexNom.test(nom.value) == false, regexAdresse.test(adresse.value) == false, regexVille.test(ville.value) == false, regexEmail.test(email.value) == false) {
+            const erreurForm = document.getElementById('erreur6');
+            erreurForm.classList.remove('bloc__from--p--flex_2');
+            erreurForm.setAttribute('class', 'bloc__from--p--flex_3');
+
+        }
     }); //fin de listner
 }; //fin validform
 
