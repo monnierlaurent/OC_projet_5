@@ -129,14 +129,13 @@ validerForms = () => {
     const email = document.getElementById('email');
 
 
-
     const paragErreur1 = document.getElementById('erreur1');
     const paragErreur2 = document.getElementById('erreur2');
     const paragErreur3 = document.getElementById('erreur3');
     const paragErreur4 = document.getElementById('erreur4');
     const paragErreur5 = document.getElementById('erreur5');
 
-
+    // initiolisation des variables contenant les expréssions réguliere
     const regexPrenom = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ \'.-]{2,20} *$/;
     const regexNom = /^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ \'.-]{2,20} *$/;
     const regexAdresse = /^[0-9]{1,3}(([,. ]?){1}[-a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ']+)/;
@@ -145,12 +144,12 @@ validerForms = () => {
 
 
 
-    valide = (e) => {
+    valide = () => {
 
+        // ecoute de l'evenement change des inputs
         prenom.addEventListener('change', (event) => {
 
             event.preventDefault;
-
             if (prenom.value.length === 0) {
                 paragErreur1.setAttribute('class', 'bloc__form--font--erreur2 bloc__from--p--flex');
                 paragErreur1.innerHTML = '* champ obligatoire';
@@ -226,10 +225,13 @@ validerForms = () => {
     };
 
     valide();
+    // ecoute du evenement click sur le button commander
     btnEnvoi.addEventListener('click', (event) => {
         event.preventDefault();
-
+        // verifictaion des expression regulieres
         if (regexPrenom.test(prenom.value) !== false && prenom.value !== false && regexNom.test(nom.value) !== false && regexAdresse.test(adresse.value) !== false && regexVille.test(ville.value) !== false && regexEmail.test(email.value) !== false) {
+
+            //creation de l'objet contact
 
             const contact = {
                 firstName: prenom.value,
@@ -241,24 +243,32 @@ validerForms = () => {
 
             const storage2 = localStorage.length;
 
+            // bouclage sur le localstorage pour recuperer les _id des produits
+
             for (let i = 0; i < storage2; i++) {
                 const objJSON2 = localStorage.getItem(localStorage.key(i));
                 const objJsonParse2 = JSON.parse(objJSON2);
 
+                // stackage des _id trouvés dans le tableau product_id
                 product_id.push(objJsonParse2.id);
             };
 
+            // creation de l'objet order pour l'envoie a l'api backend
             const order = {
                 contact: contact,
                 products: product_id
             };
+            // envoie de l'ojet order a l'api backend
 
             const datas = send('http://localhost:3000/api/teddies/order', order);
             datas.then(rep => {
 
+                // vidage du locale storage
                 localStorage.clear();
-
+                // convertion de la reponse en json en chaine de characters
                 const repstring = JSON.stringify(rep);
+
+                // mise en memoire de la reponse du navigateur de la reponse
                 localStorage.setItem('repOrder', repstring);
 
 
@@ -296,13 +306,13 @@ validerForms = () => {
             }).catch((error => {
 
             })); //fin catch
-        } else // message erreur de remplissage du formulaire
-        if (regexPrenom.test(prenom.value) == false, regexNom.test(nom.value) == false, regexAdresse.test(adresse.value) == false, regexVille.test(ville.value) == false, regexEmail.test(email.value) == false) {
+            // message erreur de remplissage du formulaire
+
+        } else if (regexPrenom.test(prenom.value) == false, regexNom.test(nom.value) == false, regexAdresse.test(adresse.value) == false, regexVille.test(ville.value) == false, regexEmail.test(email.value) == false) {
             const erreurForm = document.getElementById('erreur6');
             erreurForm.classList.remove('bloc__from--p--flex_2');
             erreurForm.setAttribute('class', 'bloc__from--p--flex_3');
-
-        }
+        };
     }); //fin de listner
 }; //fin validform
 

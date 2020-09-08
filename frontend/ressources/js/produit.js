@@ -33,12 +33,12 @@ pageProduit = () => {
             const divbutton = document.getElementById("panier_ajout");
             divbutton.appendChild(createElm2('div', 'Ajoutez au panier', 'id', 'lienPanier', 'class', 'bloc__section_2__button--style'));
 
-            //---------------------------
+
             document.getElementById('lienPanier').addEventListener('click', (event) => {
 
-                console.log(localStorage);
-                //let keyObj = localStorage.length;
 
+                // creation d'une key obj pour les produit mis dans le panier pour gerer la suppression d'un seul produit
+                console.log(localStorage);
                 let keyObj = 0;
 
                 if (localStorage.length !== 0) {
