@@ -68,6 +68,8 @@ createPanier = () => {
         const newbtn2 = document.getElementById('btn2');
         newbtn2.appendChild(createElm2('button', 'Tout supprimer', 'class', 'bloc__table__button--style', 'id', 'deleteTotalPanier'));
 
+        // suppersion total panier
+
         document.getElementById('deleteTotalPanier').addEventListener('click', () => {
             localStorage.clear();
             location.reload(), false;
