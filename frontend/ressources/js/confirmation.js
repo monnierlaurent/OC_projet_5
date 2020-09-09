@@ -1,14 +1,19 @@
 checkConfirme = () => {
 
     if (localStorage.length === 0) {
-        modals('Votre panier est vide', 'Retour au panier', './index.html');
+        window.location = 'index.html';
     } else {
         createConfirme();
     };
 };
+
 createConfirme = () => {
     const repJson = localStorage.getItem('repOrder');
     const repParse = JSON.parse(repJson);
+
+    if (repParse === null) {
+        window.location = 'index.html';
+    };
 
 
     totalpanier = () => {

@@ -227,9 +227,13 @@ validerForms = () => {
     };
 
     valide();
+
     // ecoute du evenement click sur le button commander
+
     btnEnvoi.addEventListener('click', (event) => {
+
         event.preventDefault();
+
         // verifictaion des expression regulieres
         if (regexPrenom.test(prenom.value) !== false && prenom.value !== false && regexNom.test(nom.value) !== false && regexAdresse.test(adresse.value) !== false && regexVille.test(ville.value) !== false && regexEmail.test(email.value) !== false) {
 
@@ -267,47 +271,21 @@ validerForms = () => {
 
                 // vidage du locale storage
                 localStorage.clear();
+
                 // convertion de la reponse en json en chaine de characters
+
                 const repstring = JSON.stringify(rep);
 
                 // mise en memoire de la reponse du navigateur de la reponse
+
                 localStorage.setItem('repOrder', repstring);
 
-
-
-                // masquage du header + section tableau produit + formulaire 
-                const sectionTAblePanier = document.getElementById('bloc__section__panier');
-                sectionTAblePanier.setAttribute('class', 'bloc__section__panier');
-
-                const formClient = document.getElementById('formulaire');
-                formClient.setAttribute('class', 'bloc__section__panier');
-
-                //creation de la page de confirmation
-                const sectionConfirm = document.getElementById('bloc__section__confirmation');
-                sectionConfirm.setAttribute('class', 'bloc__section_3__padding');
-
-                sectionConfirm.appendChild(createElm2('header', '', 'id', 'header_confirm', 'class', 'bloc__header--flex'));
-
-                const headerConfirm = document.getElementById('header_confirm');
-                headerConfirm.appendChild(createElm1('h2', 'Nous vous remercions de votre commande', 'class', 'bloc__section__header--font2'));
-
-                sectionConfirm.appendChild(createElm2('p', '', 'id', 'num_commande', 'class', 'bloc__section_3__parag--font'));
-                sectionConfirm.appendChild(createElm2('p', '', 'id', 'total_commande', 'class', 'bloc__section_3__parag--font'));
-                sectionConfirm.appendChild(createElm1('p', 'Vous serez livré dans les meilleurs délais', 'class', 'bloc__section_3__parag--font'));
-                sectionConfirm.appendChild(createElm1('p', 'A bientôt', 'class', 'bloc__section_3__parag--font'));
-                sectionConfirm.appendChild(createElm2('a', 'Retour au catalogue', 'id', 'retourCat2', 'class', 'bloc__section_2__button_2--style button--font'));
-
-                const retourCatalogue2 = document.getElementById('retourCat2');
-                retourCatalogue2.addEventListener('click', function() {
-                    localStorage.clear();
-                    window.location = 'index.html';
-                });
-
-                checkConfirme();
+                window.location = 'orinoco_confirmation_commande.html';
 
             }).catch((error => {
 
             })); //fin catch
+
             // message erreur de remplissage du formulaire
 
         } else if (regexPrenom.test(prenom.value) == false, regexNom.test(nom.value) == false, regexAdresse.test(adresse.value) == false, regexVille.test(ville.value) == false, regexEmail.test(email.value) == false) {
