@@ -38,7 +38,7 @@ pageProduit = () => {
 
 
                 // creation d'une key obj pour les produit mis dans le panier pour gerer la suppression d'un seul produit
-                console.log(localStorage);
+
                 let keyObj = 0;
 
                 if (localStorage.length !== 0) {
@@ -48,7 +48,6 @@ pageProduit = () => {
                         tableKey.push(parseInt(localStorage.key(i)));
                     };
                     keyObj = tableKey[0] + 1;
-                    console.log(tableKey);
                 };
 
                 const order1 = {
